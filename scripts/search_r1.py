@@ -3,7 +3,7 @@
 Input: artifacts/features/grammar_<grid>.parquet - every grammar feature on the selection rows
 (training days of the 30% "sel" users + val days; only val half A is used for decisions).
 
-1. one LightGBM on base + all candidates -> gain importance;
+1. one LightGBM (lambdarank, groups = user-days) on base + all candidates -> gain importance;
 2. top-K curve, K in KS: GAUC on val half A; choose the smallest K within TOL of the best;
 3. write artifacts/r1_<grid>_selected.json (names, curve, chosen weightings, cost).
 
@@ -37,10 +37,11 @@ def log(s):
 
 def selection_data(grid: str):
     g = pl.read_parquet(FEAT / f"grammar_{grid}.parquet")
-    base = pl.read_parquet(FEAT / "b0.parquet", columns=["row"] + BASE_COLS)
+    # lifetimes (age) are in the grammar and in the shared base block: keep one copy, not a candidate
+    base = pl.read_parquet(FEAT / "b0.parquet", columns=["row"] + [c for c in BASE_COLS if c not in g.columns])
     rows = pl.read_parquet(ROWS).select("row", "uid", "day", "y", "val_half", "sel")
-    df = g.join(rows, on="row", how="inner").join(base, on="row", how="left")
-    cand = [c for c in g.columns if c != "row"]
+    df = g.join(rows, on="row", how="inner").join(base, on="row", how="left").sort("day", "uid", maintain_order=True)
+    cand = [c for c in g.columns if c != "row" and c not in BASE_COLS]
     del g
     tr = df.filter(pl.col("day").is_in(STAGES["val"]["train"]) & pl.col("sel"))
     va = df.filter(pl.col("day").is_in(STAGES["val"]["eval"]) & (pl.col("val_half") == "A"))
@@ -48,8 +49,8 @@ def selection_data(grid: str):
     return tr, va, cand
 
 
-def score(tr, va, cols):
-    b = fit(tr, cols, PARAMS, va=va)
+def score(tr, va, cols, **extra):
+    b = fit(tr, cols, {**PARAMS, **extra}, va=va)
     return gauc(va, predict(b, va, cols)), b
 
 
@@ -62,7 +63,10 @@ def main():
     tr, va, cand = selection_data(a.grid)
     log(f"{a.grid}: {len(cand)} candidates, selection train {tr.height}, val_A {va.height}")
     g_base, _ = score(tr, va, BASE_COLS)
-    g_all, b = score(tr, va, BASE_COLS + cand)
+    g_all, _ = score(tr, va, BASE_COLS + cand)
+    # Importance from a ranking objective (groups = user-days): with the binary objective the gain goes to
+    # user-level features that explain differences between users, which within-user-day GAUC cannot see.
+    _, b = score(tr, va, BASE_COLS + cand, objective="lambdarank")
     imp = sorted(zip(BASE_COLS + cand, b.feature_importance("gain")), key=lambda x: -x[1])
     ranked = [n for n, _ in imp if n in set(cand)]
     log(f"base only {g_base:.4f}, all {len(cand)} candidates {g_all:.4f}")

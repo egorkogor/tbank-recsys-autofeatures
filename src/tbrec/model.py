@@ -12,11 +12,28 @@ from .metrics import summary
 
 ROWS = ART / "rows.parquet"
 FEAT = ART / "features"
-BASE_PARAMS = dict(objective="binary", learning_rate=0.05, num_leaves=63, min_data_in_leaf=200,
+OBJECTIVE_FILE = ART / "objective.json"  # chosen once on B0, val half A (scripts/choose_objective.py)
+BASE_PARAMS = dict(objective=json.loads(OBJECTIVE_FILE.read_text())["objective"] if OBJECTIVE_FILE.exists() else "binary",
+                   learning_rate=0.05, num_leaves=63, min_data_in_leaf=200,
                    feature_fraction=0.8, bagging_fraction=0.8, bagging_freq=1, lambda_l2=1.0,
                    verbose=-1, num_threads=THREADS, seed=SEED, max_bin=255)
+RANKING = ("lambdarank", "rank_xendcg")
 OPTUNA_TRIALS = 12  # the same for the final model of every branch (tuned on the 30% "sel" users)
 MAX_ROUNDS, EARLY = 3000, 100
+
+
+def groups(df: pl.DataFrame) -> np.ndarray:
+    """Sizes of consecutive (day, uid) runs; frames are kept sorted by (day, uid) by split()."""
+    g = df.group_by(["day", "uid"], maintain_order=True).len()["len"].to_numpy()
+    assert len(g) == df.select(pl.struct("day", "uid").rle_id().max()).item() + 1, "rows not grouped by user-day"
+    return g
+
+
+def dataset(df: pl.DataFrame, cols: list[str], objective: str, reference=None, free_raw_data=True) -> lgb.Dataset:
+    d = lgb.Dataset(matrix(df, cols), df["y"].to_numpy(), feature_name=cols, reference=reference, free_raw_data=free_raw_data)
+    if objective in RANKING:
+        d.set_group(groups(df))
+    return d
 
 
 def load(sources: dict[str, list[str] | None]) -> tuple[pl.DataFrame, list[str]]:
@@ -33,6 +50,7 @@ def load(sources: dict[str, list[str] | None]) -> tuple[pl.DataFrame, list[str]]
 
 def split(df: pl.DataFrame, stage: str) -> dict[str, pl.DataFrame]:
     s = STAGES[stage]
+    df = df.sort("day", "uid", maintain_order=True)
     tr = df.filter(pl.col("day").is_in(s["train"]))
     ev = df.filter(pl.col("day").is_in(s["eval"]))
     out = {"train": tr, "eval": ev}
@@ -46,15 +64,39 @@ def matrix(df: pl.DataFrame, cols: list[str]) -> np.ndarray:
     return df.select([pl.col(c).cast(pl.Float32) for c in cols]).to_numpy()
 
 
+def gauc_feval(df: pl.DataFrame):
+    """LightGBM eval: GAUC inside (uid, day) groups, for early stopping on the ranking metric.
+
+    LogLoss is a poor stopping rule here: it reacts to the week-to-week shift of the Listen+ base
+    rate, which ranking inside a user-day does not see. Ties are broken arbitrarily (eval only).
+    """
+    g = df.select(pl.struct("uid", "day").rank("dense").alias("g"))["g"].to_numpy()
+    y = df["y"].to_numpy().astype(np.float64)
+    npos = np.bincount(g, weights=y)
+    n = np.bincount(g).astype(np.float64)
+    ok = (npos > 0) & (npos < n)
+    w = n[ok] / n[ok].sum()
+
+    def feval(preds, _data):
+        order = np.lexsort((preds, g))
+        gs = g[order]
+        start = np.searchsorted(gs, gs, side="left")
+        rank = np.arange(len(gs)) - start + 1.0
+        rpos = np.bincount(gs, weights=rank * y[order], minlength=len(n))
+        auc = (rpos - npos * (npos + 1) / 2) / np.maximum(npos * (n - npos), 1)
+        return "gauc", float((auc[ok] * w).sum()), True
+    return feval
+
+
 def fit(tr: pl.DataFrame, cols: list[str], params: dict, va: pl.DataFrame | None = None,
         rounds: int | None = None) -> lgb.Booster:
     p = {**BASE_PARAMS, **params}
-    dtr = lgb.Dataset(matrix(tr, cols), tr["y"].to_numpy(), feature_name=cols, free_raw_data=True)
+    dtr = dataset(tr, cols, p["objective"])
     if va is None:
         return lgb.train(p, dtr, num_boost_round=rounds)
-    dva = lgb.Dataset(matrix(va, cols), va["y"].to_numpy(), reference=dtr)
-    return lgb.train(p, dtr, num_boost_round=rounds or MAX_ROUNDS, valid_sets=[dva],
-                     callbacks=[lgb.early_stopping(EARLY, verbose=False)])
+    dva = dataset(va, cols, p["objective"], reference=dtr)
+    return lgb.train({**p, "metric": "None"}, dtr, num_boost_round=rounds or MAX_ROUNDS, valid_sets=[dva],
+                     feval=gauc_feval(va), callbacks=[lgb.early_stopping(EARLY, verbose=False)])
 
 
 def predict(b: lgb.Booster, df: pl.DataFrame, cols: list[str]) -> np.ndarray:
@@ -70,18 +112,19 @@ def tune(tr: pl.DataFrame, va: pl.DataFrame, cols: list[str], trials: int = OPTU
     import optuna
 
     optuna.logging.set_verbosity(optuna.logging.WARNING)
-    dtr = lgb.Dataset(matrix(tr, cols), tr["y"].to_numpy(), feature_name=cols, free_raw_data=False)
-    Xva, yva = matrix(va, cols), va["y"].to_numpy()
-    dva = lgb.Dataset(Xva, yva, reference=dtr, free_raw_data=False)
+    dtr = dataset(tr, cols, BASE_PARAMS["objective"], free_raw_data=False)
+    Xva = matrix(va, cols)
+    dva = dataset(va, cols, BASE_PARAMS["objective"], reference=dtr, free_raw_data=False)
+    feval = gauc_feval(va)
 
     def objective(trial):
-        p = {**BASE_PARAMS,
+        p = {**BASE_PARAMS, "metric": "None",
              "num_leaves": trial.suggest_int("num_leaves", 15, 255, log=True),
              "min_data_in_leaf": trial.suggest_int("min_data_in_leaf", 20, 2000, log=True),
              "feature_fraction": trial.suggest_float("feature_fraction", 0.3, 1.0),
              "lambda_l2": trial.suggest_float("lambda_l2", 1e-3, 30, log=True),
              "learning_rate": trial.suggest_float("learning_rate", 0.02, 0.15, log=True)}
-        b = lgb.train(p, dtr, num_boost_round=MAX_ROUNDS, valid_sets=[dva],
+        b = lgb.train(p, dtr, num_boost_round=MAX_ROUNDS, valid_sets=[dva], feval=feval,
                       callbacks=[lgb.early_stopping(EARLY, verbose=False)])
         trial.set_user_attr("rounds", b.best_iteration)
         g = gauc(va, b.predict(Xva, num_iteration=b.best_iteration))

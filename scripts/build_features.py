@@ -47,7 +47,8 @@ def make_rows(ev: pl.DataFrame) -> pl.DataFrame:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("what", choices=["rows", "b0", "b0_trunc512", "grammar", "names"])
+    ap.add_argument("what", choices=["rows", "b0", "b0_trunc", "grammar", "names"])
+    ap.add_argument("--user-limit", type=int, default=512)
     ap.add_argument("--grid", choices=["decay", "window"], default="decay")
     ap.add_argument("--days", default="")
     ap.add_argument("--users-frac", type=float, default=0.0, help="keep only users with sel=True on training days")
@@ -74,8 +75,8 @@ def main():
     limit = None
     if a.what == "b0":
         names, rhythm, out = BASE + B0, True, "b0"
-    elif a.what == "b0_trunc512":
-        names, rhythm, out, limit = BASE + B0, True, "b0_trunc512", 512
+    elif a.what == "b0_trunc":
+        names, rhythm, out, limit = BASE + B0, True, f"b0_trunc{a.user_limit}", a.user_limit
     elif a.what == "grammar":
         names, rhythm, out = grammar(DECAY_GRID if a.grid == "decay" else WINDOW_GRID), False, f"grammar_{a.grid}"
     else:
@@ -84,7 +85,7 @@ def main():
     print(f"{out}: {len(names)} features, {rows.height} rows, {len(days)} days", flush=True)
     x = build(rows.drop("val_half", "sel"), ev, names, with_rhythm=rhythm, user_limit=limit,
               log=lambda s: print(s, f"{time.time() - t0:.0f}s", flush=True))
-    if a.what in ("b0", "b0_trunc512"):
+    if a.what in ("b0", "b0_trunc"):
         x = x.join(load_items(), on="item", how="left")
     x = x.drop("uid", "item", "artist", "album", "day", "t", "y").sort("row")
     x.write_parquet(FEAT / f"{out}.parquet")

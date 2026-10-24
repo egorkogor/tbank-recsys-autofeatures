@@ -69,13 +69,14 @@ def main():
     t0 = time.time()
     state = json.loads(STATE.read_text()) if STATE.exists() else {
         "start": json.loads((ART / "r1_decay_selected.json").read_text())["names"], "accepted": [], "journal": []}
-    props = json.loads(Path(a.proposals).read_text())
+    text = Path(a.proposals).read_text(encoding="utf-8")
+    props = json.loads(text[text.find("["): text.rfind("]") + 1])  # the agent may wrap the array in a code block
     current = state["start"] + state["accepted"]
     entries, comps = [], set()
     for p in props:
         name = p["name"].replace(" ", "")
         errs = [f"{c}: {e}" for c in components(name) if (e := check_name(c))]
-        if name in current:
+        if name in current or name in BASE_COLS:
             errs.append("already in the set")
         entries.append({"round": a.round, "name": name, "why": p.get("why", ""), "error": "; ".join(errs) or None})
         if not errs:
@@ -88,17 +89,19 @@ def main():
     ok = [e for e in entries if e["error"] is None]
     log(f"round {a.round}: {len(props)} proposals, {len(ok)} pass checks")
     # selection rows = rows of the R1 grammar table; grammar_decay columns reused, the rest computed
-    g = pl.read_parquet(FEAT / "grammar_decay.parquet")
+    gpath = FEAT / "grammar_decay.parquet"
+    have = set(pl.read_parquet_schema(gpath))
+    need_cur = sorted({c for n in current for c in components(n)})
+    todo = sorted((comps | set(need_cur)) - have)
+    g = pl.read_parquet(gpath, columns=["row"] + sorted((comps | set(need_cur)) & have))
     rows = pl.read_parquet(ROWS).select("row", "uid", "item", "artist", "album", "day", "t", "y", "val_half", "sel")
     rows = rows.join(g.select("row"), on="row", how="semi")
-    need_cur = sorted({c for n in current for c in components(n)})
-    have = set(g.columns)
-    todo = sorted((comps | set(need_cur)) - have)
-    df = rows.join(g.select(["row"] + sorted((comps | set(need_cur)) & have)), on="row", how="left")
+    df = rows.join(g, on="row", how="left")
     if todo:
         x = build(rows.drop("val_half", "sel"), ev, todo, log=lambda s: None).select(["row"] + todo)
         df = df.join(x, on="row", how="left")
-    df = df.join(pl.read_parquet(FEAT / "b0.parquet", columns=["row"] + BASE_COLS), on="row", how="left")
+    df = df.join(pl.read_parquet(FEAT / "b0.parquet", columns=["row"] + [c for c in BASE_COLS if c not in df.columns]),
+                 on="row", how="left")
     allnames = list(dict.fromkeys(current + [e["name"] for e in ok]))
     df = df.with_columns([materialise(df, n).cast(pl.Float32).alias(n) for n in allnames if n not in df.columns])
     tr = df.filter(pl.col("day").is_in(STAGES["val"]["train"]) & pl.col("sel"))

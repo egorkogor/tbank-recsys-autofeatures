@@ -7,6 +7,7 @@ __pycache__/
 external/
 
 logs/*
+src/*.egg-info/
 
 # Local tool settings and work notes
 .claude/

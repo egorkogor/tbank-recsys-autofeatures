@@ -7,7 +7,7 @@ export PYTHONIOENCODING=utf-8
 SEL_DAYS=274,277,280,283,286,287,289,291,293
 step() { local name=$1; shift; echo "$(date +%H:%M:%S) start $name"; "$@" > "logs/$name.log" 2>&1; echo "$(date +%H:%M:%S) done  $name"; }
 
-until [ -f artifacts/features/grammar_decay.cost.json ]; do sleep 20; done
+until [ -f artifacts/features/grammar_decay.cost.json ] && [ -f artifacts/objective.json ]; do sleep 20; done
 step search_r1_decay  $PY scripts/search_r1.py --grid decay
 step run_b0_val       $PY scripts/run_branch.py b0 --stage val
 step feat_r1_decay    $PY scripts/build_features.py names --names-file artifacts/r1_decay_selected.json --out r1_decay
