@@ -98,7 +98,7 @@ def main():
     best = max(curve.values())
     k = a.k or min(kk for kk, v in curve.items() if v >= best - TOL)
     names = ranked[:k]
-    res = {"grid": a.grid, "k": k, "names": names, "curve": curve, "gauc_base_only": g_base, "gauc_all_candidates": g_all,
+    res = {"grid": a.grid, "k": k, "names": names, "ranked": ranked, "curve": curve, "gauc_base_only": g_base, "gauc_all_candidates": g_all,
            "weights": Counter(n.split("__")[3] for n in names), "keys": Counter(n.split("__")[0] for n in names),
            "aggs": Counter(n.split("__")[2] for n in names), "importance_top50": imp[:50],
            "placebo": a.placebo, "stability": stability,

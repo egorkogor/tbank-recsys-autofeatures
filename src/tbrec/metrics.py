@@ -12,11 +12,17 @@ from .config import SEED
 
 
 def per_group(df: pl.DataFrame, score: str, k: int = 10) -> pl.DataFrame:
-    """One row per (uid, day): auc, weight, ndcg."""
+    """One row per (uid, day): auc, weight, ndcg.
+
+    Ties: AUC uses average ranks; for NDCG positions inside a tie are ordered by a fixed hash of the row id,
+    so the result depends neither on the row order of the frame nor on the label (reviewer finding 24.10).
+    """
     g = ["uid", "day"]
-    x = (df.select(g + ["y", pl.col(score).alias("s")])
+    tb = (pl.col("row").hash(seed=SEED) if "row" in df.columns else pl.int_range(pl.len()).hash(seed=SEED)).alias("tb")
+    x = (df.select(g + ["y", pl.col(score).alias("s"), tb])
+         .sort(g + ["s", "tb"], descending=[False, False, True, False])
          .with_columns(pl.col("s").rank("average").over(g).alias("r"),
-                       pl.col("s").rank("ordinal", descending=True).over(g).alias("pos")))
+                       pl.int_range(1, pl.len() + 1).over(g).alias("pos")))
     x = x.with_columns(pl.when(pl.col("pos") <= k).then(pl.col("y") / (pl.col("pos") + 1).log(2)).otherwise(0.0).alias("dcg"))
     agg = x.group_by(g).agg(pl.len().alias("n"), pl.col("y").sum().alias("npos"),
                             pl.col("r").filter(pl.col("y") == 1).sum().alias("rpos"),
@@ -75,6 +81,14 @@ def paired_bootstrap(df: pl.DataFrame, scores: list[str], base: str, n: int = 10
         for j, m in enumerate(["gauc", "ndcg10"]):  # two-sided bootstrap p-value of delta != 0
             res[s][f"p_{m}"] = float(min(1.0, 2 * (min((d[:, j] <= 0).sum(), (d[:, j] >= 0).sum()) + 1) / (n + 1)))
     return res
+
+
+def verdict_holm(delta: float, ci: list[float], p_holm: float, metric: str, alpha: float = 0.05) -> str:
+    """Decision word after the Holm correction: "better" / "worse" also need p_holm < alpha."""
+    v = verdict(delta, ci, metric)
+    if v in ("лучше", "хуже") and p_holm >= alpha:
+        return "не определено (после Холма)"
+    return v
 
 
 def holm(pvals: dict) -> dict:

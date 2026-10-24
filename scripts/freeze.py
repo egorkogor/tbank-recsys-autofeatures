@@ -34,16 +34,18 @@ if DATASET != "yambda":  # transfer domains: the same method, no Perseus
 
 
 def main():
-    root = Path(__file__).resolve().parents[1]
-    dirty = subprocess.run(["git", "status", "--porcelain", "--", "src", "scripts", "tests"], cwd=root,
-                           capture_output=True, text=True).stdout.strip()
+    from tbrec.freeze import CODE, FREEZE, git, manifest
+
+    dirty = git("status", "--porcelain", "--", *CODE)
     assert not dirty, f"commit code before the freeze:\n{dirty}"
-    commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True).stdout.strip()
-    f = ART / "freeze.json"
-    assert not f.exists(), "already frozen"
-    f.write_text(json.dumps({"commit": commit, "time": time.strftime("%Y-%m-%d %H:%M:%S"), "branches": sys.argv[1:],
-                             "margins": MARGIN, "stages": STAGES, "hypotheses": HYPOTHESES}, indent=1))
-    print("frozen at", commit, "branches:", sys.argv[1:])
+    assert not FREEZE.exists(), "already frozen"
+    branches = sys.argv[1:]
+    for x, base in HYPOTHESES.values():
+        assert x in branches and base in branches, f"hypothesis pair {x} / {base} must be frozen"
+    m = manifest(branches)
+    FREEZE.write_text(json.dumps({**m, "time": time.strftime("%Y-%m-%d %H:%M:%S"), "branches": branches,
+                                  "margins": MARGIN, "stages": STAGES, "hypotheses": HYPOTHESES}, indent=1))
+    print("frozen at", m["commit"], "branches:", branches, "files hashed:", sum(len(v) for v in m["branches_files"].values()))
 
 
 if __name__ == "__main__":

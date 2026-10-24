@@ -55,17 +55,15 @@ def main():
     ap.add_argument("branch")
     ap.add_argument("--stage", choices=["val", "oot"], default="val")
     ap.add_argument("--trials", type=int, default=None)
-    ap.add_argument("--force", action="store_true")
     a = ap.parse_args()
+    if a.stage == "oot":  # one gate for every branch kind, no override (reviewer finding 24.10)
+        from tbrec.freeze import check
+        check(a.branch)
     if a.branch in TRIVIAL:
         return run_trivial(a.branch, a.stage)
     out = RUNS / a.branch
     out.mkdir(parents=True, exist_ok=True)
     timer = Timer()
-    if a.stage == "oot":
-        freeze = ART / "freeze.json"
-        assert freeze.exists(), "OOT is run only after the freeze (artifacts/freeze.json)"
-        assert a.force or not (out / "pred_oot.parquet").exists(), "OOT already scored for this branch"
     with timer("load"):
         df, cols = load(resolve(a.branch, a.stage))
         parts = split(df, a.stage)

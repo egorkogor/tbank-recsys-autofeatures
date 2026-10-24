@@ -137,7 +137,10 @@ def _candidates(ev: pl.DataFrame, c: int, n_items: int) -> pl.DataFrame:
     target = ev.filter((pl.col("day") >= c) & (pl.col("day") < c + 7))
     users = target.select("uid").unique().join(hist.select("uid").unique(), on="uid", how="semi").sort("uid")
     own = (hist.join(users, on="uid", how="semi").group_by("uid", "item").agg(pl.len().alias("n"), pl.col("t").max().alias("last"))
-           .sort(["uid", "n", "last"], descending=[False, True, True]).with_columns(pl.int_range(1, pl.len() + 1).over("uid").alias("r"))
+           # item id breaks ties: without it the multi-threaded sort ranked tied products differently on every run
+           # (found by the future-invariance test, 24.10; the frozen rows were built before this fix)
+           .sort(["uid", "n", "last", "item"], descending=[False, True, True, False], maintain_order=True)
+           .with_columns(pl.int_range(1, pl.len() + 1).over("uid").alias("r"))
            .filter(pl.col("r") <= TOP_HIST).select("uid", "item", pl.col("r").cast(pl.Float32).alias("cand_hist_rank")))
     pop = (hist.filter(pl.col("day") >= c - 7).group_by("item").agg(pl.col("uid").n_unique().alias("n"))
            .sort(["n", "item"], descending=[True, False]).head(TOP_POP).with_row_index("cand_pop_rank", offset=1)

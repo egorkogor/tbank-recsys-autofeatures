@@ -73,7 +73,9 @@ if DATASET in ("kion", "x5"):
         "r1_decay": {"b0": BASE_COLS, "r1_decay": None},
         "r1_window": {"b0": BASE_COLS, "r1_window": None},
         f"r1_decay_k{len(_KB0)}": {"b0": BASE_COLS, "r1_decay": ("top", "r1_decay_selected.json", len(_KB0))},
-        f"r1_window_k{len(_KB0)}": {"b0": BASE_COLS, "r1_window": ("top", "r1_window_selected.json", len(_KB0))},
+        # the window search chose fewer than len(B0) names, so the equal-count set is computed separately
+        # from the search's full ranking (reviewer finding 24.10)
+        f"r1_window_k{len(_KB0)}": {"b0": BASE_COLS, f"r1_window_k{len(_KB0)}": None},
         "base_only": {"b0": BASE_COLS},
     }
     # candidate-generator ranks: lower is better, so the score is the negated rank
