@@ -61,3 +61,16 @@ def test_context_invariant(log):
     cut = G.snapshot(rows, context.add(log.filter(pl.col("t") < cutoff)), names, cutoff, s).sort("row")
     scr = G.snapshot(rows, context.add(scramble_future(log, cutoff)), names, cutoff, s).sort("row")
     assert full.equals(cut) and full.equals(scr)
+
+
+def test_mood_invariant(log):
+    from tbrec import audio, mood
+
+    if not (audio.EMB.exists() and mood.CLUSTERS.exists()):
+        pytest.skip("embeddings / clusters not prepared")
+    idx, E = audio.load()
+    rows, cutoff = _rows(log), day_start(DAY_TESTED)
+    full = mood.snapshot(rows, log, cutoff, idx, E).sort("row")
+    cut = mood.snapshot(rows, log.filter(pl.col("t") < cutoff), cutoff, idx, E).sort("row")
+    scr = mood.snapshot(rows, scramble_future(log, cutoff), cutoff, idx, E).sort("row")
+    assert full.equals(cut) and full.equals(scr)

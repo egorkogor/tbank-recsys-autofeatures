@@ -13,6 +13,8 @@ BRANCHES = {
     # automatic search over the grammar: same base block, aggregates chosen by the search
     "r1_decay": {"b0": BASE_COLS, "r1_decay": None},
     "r1_window": {"b0": BASE_COLS, "r1_window": None},
+    # R1 + features proposed by the agent (R5) that passed the leak check and the val-A gain threshold
+    "r1_r5": {"b0": BASE_COLS, "r1_decay": None, "r5": None},
     # R1 with the stability stability gate (top on >= 3 of 5 separate training days)
     "r1_decay_stable": {"b0": BASE_COLS, "r1_decay_stable": None},
     # equal count with B0 (56 aggregates): the first 56 names of the search's ranked list
@@ -27,6 +29,8 @@ BRANCHES = {
     # request-time context (hour / part of day / weekday of the impression): hand-made vs searched
     "b0_ctx": {"b0": None, "ctx_b0": None},
     "r1_ctx": {"b0": BASE_COLS, "r1_decay": None, "ctx_r1": None},
+    # listener-state proxies on top of the hand context: sound x time of day, yesterday's sound, audio clusters
+    "b0_ctx_mood": {"b0": None, "ctx_b0": None, "mood": None},
     "full": {"b0": None, "r1_decay": None, "ials_{stage}": None, "audio": None, "perseus_{stage}": None},
 }
 
