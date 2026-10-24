@@ -31,6 +31,9 @@ BRANCHES = {
     "r1_ctx": {"b0": BASE_COLS, "r1_decay": None, "ctx_r1": None},
     # listener-state proxies on top of the hand context: sound x time of day, yesterday's sound, audio clusters
     "b0_ctx_mood": {"b0": None, "ctx_b0": None, "mood": None},
+    # streaming extension (NOT the main comparison): today's listens before the impression
+    "b0_sess": {"b0": None, "session": None},
+    "r1_sess": {"b0": BASE_COLS, "r1_decay": None, "session": None},
     "full": {"b0": None, "r1_decay": None, "ials_{stage}": None, "audio": None, "perseus_{stage}": None},
 }
 

@@ -74,3 +74,19 @@ def test_mood_invariant(log):
     cut = mood.snapshot(rows, log.filter(pl.col("t") < cutoff), cutoff, idx, E).sort("row")
     scr = mood.snapshot(rows, scramble_future(log, cutoff), cutoff, idx, E).sort("row")
     assert full.equals(cut) and full.equals(scr)
+
+
+def test_session_features_see_only_the_past(log):
+    # streaming extension: features of an impression must not move when everything at or after its own
+    # 5-second bin is scrambled (including the impression's own outcome)
+    import numpy as np
+    from tbrec import session
+
+    rows = _rows(log).select("row", "uid", "artist", "day", "t")
+    a = session.features(rows, log).sort("row")
+    rng = np.random.default_rng(1)
+    for r in rows.sample(40, seed=3).iter_rows(named=True):
+        fut = (log["uid"] == r["uid"]) & (log["t"] >= r["t"])
+        scr = log.with_columns(pl.when(fut).then(pl.Series(rng.integers(0, 101, log.height)).cast(pl.Int16)).otherwise(pl.col("pr")).alias("pr"))
+        b = session.features(rows.filter(pl.col("row") == r["row"]), scr)
+        assert a.filter(pl.col("row") == r["row"]).equals(b), r
