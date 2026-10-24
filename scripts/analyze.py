@@ -56,6 +56,29 @@ def slices(a):
     (ART / f"slices_{a.stage}_{a.part}.md").write_text(text + "\n", encoding="utf-8")
 
 
+def guardrails(a):
+    """Does a model gain by pushing 'safe' tracks? Composition of each user-day's top 10 after re-ranking."""
+    rows = pl.read_parquet(ART / "rows.parquet").select("row", "uid", "day", "y", "val_half")
+    if a.part != "eval":
+        rows = rows.filter(pl.col("val_half") == a.part[-1])
+    df = rows.join(pl.read_parquet(ART / "features" / "b0.parquet", columns=["row"] + SLICE_COLS), on="row")
+    df = df.with_columns(pl.Series("random", np.random.default_rng(0).random(df.height)))
+    for b in a.branches:
+        p = pl.read_parquet(RUNS / b / f"pred_{a.stage}.parquet").rename({"score": b})
+        df = df.join(p.with_columns(pl.col(b).cast(pl.Float64).fill_nan(None).fill_null(pl.col(b).mean())), on="row")
+    lines = [f"Состав первых 10 позиций пользователь-дня, этап {a.stage}, часть {a.part}.", "",
+             "| порядок | Listen+ | повторы | новые треки | новые артисты | холодные треки |", "|---|---|---|---|---|---|"]
+    for b in ["random"] + a.branches:
+        top = (df.with_columns(pl.col(b).rank("ordinal", descending=True).over("uid", "day").alias("pos"))
+               .filter(pl.col("pos") <= 10))
+        lines.append(f"| {b} | {top['y'].mean():.3f} | {(top['UI__listen__cnt__all'] > 0).mean():.1%} | "
+                     f"{(top['UI__listen__cnt__all'] == 0).mean():.1%} | {(top['UA__listen__cnt__all'] == 0).mean():.1%} | "
+                     f"{(top['I__listen__cnt__w30d'] < 20).mean():.1%} |")
+    text = "\n".join(lines)
+    print(text)
+    (ART / f"guardrails_{a.stage}_{a.part}.md").write_text(text + "\n", encoding="utf-8")
+
+
 def shap(a):
     out = {}
     for b in a.branches:
@@ -71,12 +94,12 @@ def shap(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("what", choices=["slices", "shap"])
+    ap.add_argument("what", choices=["slices", "shap", "guardrails"])
     ap.add_argument("branches", nargs="+")
     ap.add_argument("--stage", default="val")
     ap.add_argument("--part", default="val_B", choices=["eval", "val_A", "val_B"])
     a = ap.parse_args()
-    slices(a) if a.what == "slices" else shap(a)
+    {"slices": slices, "shap": shap, "guardrails": guardrails}[a.what](a)
 
 
 if __name__ == "__main__":

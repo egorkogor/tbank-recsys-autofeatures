@@ -13,9 +13,9 @@ BRANCHES = {
     # automatic search over the grammar: same base block, aggregates chosen by the search
     "r1_decay": {"b0": BASE_COLS, "r1_decay": None},
     "r1_window": {"b0": BASE_COLS, "r1_window": None},
-    # equal count with B0 (57 aggregates): the first 57 names of the search's ranked list
-    "r1_decay_k57": {"b0": BASE_COLS, "r1_decay": ("top", "r1_decay_selected.json", 57)},
-    "r1_window_k57": {"b0": BASE_COLS, "r1_window": ("top", "r1_window_selected.json", 57)},
+    # equal count with B0 (56 aggregates): the first 56 names of the search's ranked list
+    "r1_decay_k56": {"b0": BASE_COLS, "r1_decay": ("top", "r1_decay_selected.json", 56)},
+    "r1_window_k56": {"b0": BASE_COLS, "r1_window": ("top", "r1_window_selected.json", 56)},
     # model scores as features (stacking), first-stage models trained before the booster's window
     "b0_ials": {"b0": None, "ials_{stage}": None},
     "b0_perseus": {"b0": None, "perseus_{stage}": None},

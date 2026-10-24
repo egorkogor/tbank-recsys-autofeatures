@@ -20,7 +20,7 @@ HYPOTHESES = {
     "H1 R1 (decay search) is not worse than B0": ("r1_decay", "b0"),
     "H2 Perseus alone is worse than B0": ("r3_perseus", "b0"),
     "H3 B0 + Perseus score is better than B0": ("b0_perseus", "b0"),
-    "H4 decay search is not worse than window search at an equal count": ("r1_decay", "r1_window_k"),
+    "H4 decay search is not worse than window search at an equal count": ("r1_decay_k56", "r1_window_k56"),
     "H6 per-type history limits beat recency truncation (Perseus)": ("r3_perseus_typed", "r3_perseus"),
 }
 
