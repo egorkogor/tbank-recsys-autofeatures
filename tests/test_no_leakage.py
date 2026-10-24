@@ -44,6 +44,21 @@ def test_agent_features_invariant(log):
     assert invariance_errors(log, names) == []
 
 
+def test_audio_invariant(log):
+    from tbrec import audio
+    from tbrec.leakcheck import scramble_future
+
+    if not audio.EMB.exists():
+        pytest.skip("audio embeddings not prepared")
+    idx, E = audio.load()
+    cutoff = day_start(DAY_TESTED)
+    rows = impressions(log, [DAY_TESTED]).with_row_index("row")
+    full = audio.snapshot(rows, log, cutoff, idx, E).sort("row")
+    cut = audio.snapshot(rows, log.filter(pl.col("t") < cutoff), cutoff, idx, E).sort("row")
+    scr = audio.snapshot(rows, scramble_future(log, cutoff), cutoff, idx, E).sort("row")
+    assert full.equals(cut) and full.equals(scr)
+
+
 def test_label_not_in_row_features(log):
     cutoff = day_start(DAY_TESTED)
     rows = impressions(log, [DAY_TESTED]).with_row_index("row")

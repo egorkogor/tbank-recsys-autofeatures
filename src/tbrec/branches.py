@@ -19,8 +19,10 @@ BRANCHES = {
     # model scores as features (stacking), first-stage models trained before the booster's window
     "b0_ials": {"b0": None, "ials_{stage}": None},
     "b0_perseus": {"b0": None, "perseus_{stage}": None},
+    # audio content (no training: snapshot of the user's taste profile, stage-independent)
+    "b0_audio": {"b0": None, "audio": None},
     "b0_r1": {"b0": None, "r1_decay": None},
-    "full": {"b0": None, "r1_decay": None, "ials_{stage}": None, "perseus_{stage}": None},
+    "full": {"b0": None, "r1_decay": None, "ials_{stage}": None, "audio": None, "perseus_{stage}": None},
 }
 
 # Single-score rankers for scale (no training).
@@ -42,3 +44,22 @@ def resolve(branch: str, stage: str) -> dict:
             v = json.loads((ART / v[1]).read_text())["names"][: v[2]]
         out[k.replace("{stage}", stage)] = v
     return out
+
+
+# ---- KION (TBREC_DATASET=kion): same branch names, the dataset's own base block and B0 ----
+from .config import DATASET  # noqa: E402
+
+if DATASET == "kion":
+    from .kion import B0 as _KB0, BASE as _KBASE, STATIC as _KSTATIC
+
+    BASE_COLS = _KSTATIC + _KBASE
+    BRANCHES = {
+        "b0": {"b0": None},
+        "r1_decay": {"b0": BASE_COLS, "r1_decay": None},
+        "r1_window": {"b0": BASE_COLS, "r1_window": None},
+        f"r1_decay_k{len(_KB0)}": {"b0": BASE_COLS, "r1_decay": ("top", "r1_decay_selected.json", len(_KB0))},
+        f"r1_window_k{len(_KB0)}": {"b0": BASE_COLS, "r1_window": ("top", "r1_window_selected.json", len(_KB0))},
+        "base_only": {"b0": BASE_COLS},
+    }
+    # candidate-generator ranks: lower is better, so the score is the negated rank
+    TRIVIAL = {"trivial_ials_rank": ("b0", "-cand_ials_rank"), "trivial_pop_rank": ("b0", "-cand_pop_rank")}

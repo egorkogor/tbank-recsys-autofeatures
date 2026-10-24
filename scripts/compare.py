@@ -34,6 +34,8 @@ def main():
     names = list(dict.fromkeys([a.base] + a.branches))
     for b in names:
         p = pl.read_parquet(RUNS / b / f"pred_{a.stage}.parquet").rename({"score": b})
+        # a model may return no score (e.g. Perseus with an empty history): a constant, i.e. no ranking signal
+        p = p.with_columns(pl.col(b).cast(pl.Float64).fill_nan(None).fill_null(pl.col(b).mean()))
         df = df.join(p, on="row", how="inner")
     per_day = {b: [round(summary(df.filter(pl.col("day") == d), b)["gauc"], 4) for d in sorted(df["day"].unique())] for b in names}
     res = paired_bootstrap(df, names, a.base, n=a.n)

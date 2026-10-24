@@ -6,8 +6,10 @@ ratio(a,b) = a / (b + 1e-6), diff(a,b) = a - b.
 
 Every component passes the truncation-invariance check first. Then, on the selection rows of R1
 (training days of the "sel" users, val half A for the decision), each proposal is added alone to the
-current set (R1 selection + earlier accepted proposals); accepted if GAUC on val half A rises by at least
-max(0.0005, 2 x seed noise of the current set). Everything is logged to artifacts/r5_state.json.
+current set (R1 selection + earlier accepted proposals) and scored with deterministic LightGBM (no feature
+or row subsampling, so seed noise is zero); accepted if GAUC on val half A rises by at least THRESHOLD.
+Accepted features are confirmed later on val half B (branch r1_r5). Everything is logged to
+artifacts/r5_state.json. A first attempt with bagging showed seed sd 0.0027 on these rows - too noisy.
 
   python scripts/r5_eval.py --round 1 --proposals logs/experiment/r5_round1.json
 """
@@ -32,7 +34,9 @@ from tbrec.model import FEAT, ROWS, fit, gauc, predict  # noqa: E402
 from tbrec.config import STAGES  # noqa: E402
 
 STATE = ART / "r5_state.json"
-PARAMS = {"learning_rate": 0.08, "num_leaves": 63, "min_data_in_leaf": 200}
+PARAMS = {"learning_rate": 0.08, "num_leaves": 63, "min_data_in_leaf": 200,
+          "feature_fraction": 1.0, "bagging_fraction": 1.0, "bagging_freq": 0}
+THRESHOLD = 0.001
 COMPOSITE = re.compile(r"^(ratio|diff)\(([A-Za-z0-9_]+),([A-Za-z0-9_]+)\)$")
 
 
@@ -107,18 +111,16 @@ def main():
     tr = df.filter(pl.col("day").is_in(STAGES["val"]["train"]) & pl.col("sel"))
     va = df.filter(pl.col("day").is_in(STAGES["val"]["eval"]) & (pl.col("val_half") == "A"))
     cols = BASE_COLS + current
-    seeds = [gauc(va, predict(b, va, cols)) for b in (fit(tr, cols, {**PARAMS, "seed": s}, va=va) for s in (1, 2, 3))]
-    base, noise = float(np.mean(seeds)), float(np.std(seeds))
-    thr = max(0.0005, 2 * noise)
-    log(f"current set {len(current)}: gauc {base:.4f} (seed sd {noise:.4f}), threshold +{thr:.4f}")
+    base, noise, thr = gauc(va, predict(fit(tr, cols, PARAMS, va=va), va, cols)), 0.0, THRESHOLD
+    log(f"current set {len(current)}: gauc {base:.4f} (deterministic), threshold +{thr:.4f}")
     for e in ok:
-        gs = [gauc(va, predict(b, va, cols + [e["name"]])) for b in (fit(tr, cols + [e["name"]], {**PARAMS, "seed": s}, va=va) for s in (1, 2))]
-        e["gauc"], e["delta"] = float(np.mean(gs)), float(np.mean(gs) - base)
+        g1 = gauc(va, predict(fit(tr, cols + [e["name"]], PARAMS, va=va), va, cols + [e["name"]]))
+        e["gauc"], e["delta"] = float(g1), float(g1 - base)
         e["accepted"] = e["delta"] >= thr
         log(f"  {e['name']}: {e['delta']:+.4f} {'ACCEPT' if e['accepted'] else ''}")
     acc = [e["name"] for e in ok if e.get("accepted")]
     if acc:
-        b = fit(tr, cols + acc, {**PARAMS, "seed": 1}, va=va)
+        b = fit(tr, cols + acc, PARAMS, va=va)
         joint = gauc(va, predict(b, va, cols + acc))
         log(f"joint with {len(acc)} accepted: {joint:.4f} ({joint - base:+.4f})")
     else:

@@ -2,13 +2,11 @@
 # Val-stage queue, part 2 (after B0): one heavy job at a time.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-mkdir -p logs/experiment
 PY=.venv/Scripts/python.exe
 export PYTHONIOENCODING=utf-8
 SEL_DAYS=274,277,280,283,286,287,289,291,293
 step() { local name=$1; shift; echo "$(date +%H:%M:%S) start $name"; "$@" > "logs/$name.log" 2>&1; echo "$(date +%H:%M:%S) done  $name"; }
 
-step r5_round1        $PY scripts/r5_eval.py --round 1 --proposals logs/experiment/r5_round1_proposals.json
 step feat_r1_decay    $PY scripts/build_features.py names --names-file artifacts/r1_decay_selected.json --out r1_decay
 step run_r1_decay_val $PY scripts/run_branch.py r1_decay --stage val
 step run_r1_decay_k57_val $PY scripts/run_branch.py r1_decay_k57 --stage val

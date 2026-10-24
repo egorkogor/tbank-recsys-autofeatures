@@ -1,5 +1,6 @@
 """LightGBM training, Optuna tuning with an equal budget for every branch, stage datasets."""
 import json
+import re
 import time
 
 import lightgbm as lgb
@@ -29,8 +30,14 @@ def groups(df: pl.DataFrame) -> np.ndarray:
     return g
 
 
+def safe_names(cols: list[str]) -> list[str]:
+    """LightGBM rejects JSON-special characters in feature names (composites like ratio(a,b))."""
+    return [re.sub(r"[^0-9A-Za-z_]", "_", c) for c in cols]
+
+
 def dataset(df: pl.DataFrame, cols: list[str], objective: str, reference=None, free_raw_data=True) -> lgb.Dataset:
-    d = lgb.Dataset(matrix(df, cols), df["y"].to_numpy(), feature_name=cols, reference=reference, free_raw_data=free_raw_data)
+    d = lgb.Dataset(matrix(df, cols), df["y"].to_numpy(), feature_name=safe_names(cols), reference=reference,
+                    free_raw_data=free_raw_data)
     if objective in RANKING:
         d.set_group(groups(df))
     return d

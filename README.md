@@ -120,7 +120,13 @@ _Заполняется:_ время построения признаков п�
 - 9 тыс. пользователей — мало последовательностей для трансформера.
 - Время дня в Yambda относительное: начало лога не привязано к полуночи.
 
-## 10. Как воспроизвести
+## 10. Источники и лицензии
+
+- **Yambda** — Yandex, [huggingface.co/datasets/yandex/yambda](https://huggingface.co/datasets/yandex/yambda), Apache-2.0. Протокол GTS и метка Listen+ — по статье: Ploshkin et al., *Yambda-5B — A Large-Scale Multi-modal Dataset for Ranking and Retrieval*, 2025.
+- **Perseus** — [github.com/perseus2026/perseus](https://github.com/perseus2026/perseus) и perseus-exps, Apache-2.0. Код фреймворка в репозиторий не входит: он ставится в `external/` по инструкции ниже, с фиксированным коммитом. Наша правка в локальной копии одна: в `pyproject.toml` и `uv.lock` указан индекс torch под CUDA 12.6. Цитата: Babkin A., Nikiforova A., Liakhnovich K., Kurdun M., Lashinin O., Ananyeva M. *Perseus: A Demo of Modular Personalization over Heterogeneous Event Sequences*. ACM, 2026, pp. 1820–1822. [doi:10.1145/3773078.3841295](https://doi.org/10.1145/3773078.3841295).
+- Код этого репозитория написан для задания; часть шагов (адаптер Perseus, генерация гипотез R5) выполнял агент Codex по заданиям из `docs/reproducibility_RU.md`, его отчёты — там же.
+
+## 11. Как воспроизвести
 
 ```bash
 python -m uv sync                          # Python 3.12, torch cu126

@@ -23,7 +23,6 @@ import polars as pl  # noqa: E402
 
 from tbrec.branches import BASE_COLS  # noqa: E402
 from tbrec.config import ART, STAGES  # noqa: E402
-from tbrec.features import parse  # noqa: E402
 from tbrec.model import FEAT, ROWS, fit, gauc, predict  # noqa: E402
 
 KS = [8, 16, 24, 32, 48, 64, 96, 128]
@@ -78,8 +77,8 @@ def main():
     k = a.k or min(kk for kk, v in curve.items() if v >= best - TOL)
     names = ranked[:k]
     res = {"grid": a.grid, "k": k, "names": names, "curve": curve, "gauc_base_only": g_base, "gauc_all_candidates": g_all,
-           "weights": Counter(parse(n)[3] for n in names), "keys": Counter(parse(n)[0] for n in names),
-           "aggs": Counter(parse(n)[2] for n in names), "importance_top50": imp[:50],
+           "weights": Counter(n.split("__")[3] for n in names), "keys": Counter(n.split("__")[0] for n in names),
+           "aggs": Counter(n.split("__")[2] for n in names), "importance_top50": imp[:50],
            "search_seconds": time.time() - t0,
            "grammar_build_seconds": json.loads((FEAT / f"grammar_{a.grid}.cost.json").read_text())["seconds"]}
     suffix = f"_k{a.k}" if a.k else ""

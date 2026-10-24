@@ -35,8 +35,11 @@ def evaluate(parts: dict, stage: str) -> dict:
 
 def run_trivial(name: str, stage: str):
     stem, col = TRIVIAL[name]
+    sign = -1.0 if col.startswith("-") else 1.0  # "-col": lower is better
+    col = col.lstrip("-")
     df, _ = load({stem: [col]})
-    parts = split(df.with_columns(pl.col(col).fill_null(-1).alias("score")), stage)
+    fill = float(df[col].max() or 0) + 1 if sign < 0 else -1.0  # missing = worst
+    parts = split(df.with_columns((sign * pl.col(col).fill_null(fill)).alias("score")), stage)
     if stage == "val":
         parts["val_A"], parts["val_B"] = (parts["eval"].filter(pl.col("val_half") == h) for h in "AB")
     out = RUNS / name
