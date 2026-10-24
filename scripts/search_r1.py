@@ -78,7 +78,7 @@ def main():
     ranked = [n for n, _ in imp if n in set(cand)]
     stability = None
     if a.stable:
-        # stability gate: a feature must rank high on several separate time slices, not on one pooled fit
+        # stability selection: a feature must rank high on several separate time slices, not on one pooled fit
         days = sorted(tr["day"].unique().to_list())
         top = {}
         for d in days:

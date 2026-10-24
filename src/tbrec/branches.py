@@ -15,7 +15,7 @@ BRANCHES = {
     "r1_window": {"b0": BASE_COLS, "r1_window": None},
     # R1 + features proposed by the agent (R5) that passed the leak check and the val-A gain threshold
     "r1_r5": {"b0": BASE_COLS, "r1_decay": None, "r5": None},
-    # R1 with the stability stability gate (top on >= 3 of 5 separate training days)
+    # R1 with a stability gate (stability selection) (top on >= 3 of 5 separate training days)
     "r1_decay_stable": {"b0": BASE_COLS, "r1_decay_stable": None},
     # equal count with B0 (56 aggregates): the first 56 names of the search's ranked list
     "r1_decay_k56": {"b0": BASE_COLS, "r1_decay": ("top", "r1_decay_selected.json", 56)},

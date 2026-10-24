@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Yambda val queue, part 5: stability checks of the search - placebo (shuffled labels) and stability gate.
+# Yambda val queue, part 5: robustness checks of the search - placebo (shuffled labels) and stability gate.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=.venv/Scripts/python.exe
