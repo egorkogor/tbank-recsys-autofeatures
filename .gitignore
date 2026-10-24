@@ -1,0 +1,18 @@
+data/
+artifacts/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+external/
+
+logs/*
+
+# Local tool settings and work notes
+.claude/
+.codex/
+.cursor/
+.agents/
+AGENTS.md
+CLAUDE.md
+**/SKILL.md

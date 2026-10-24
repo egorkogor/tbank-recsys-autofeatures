@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: tbrec
+Version: 0.1.0
+Summary: Automated feature construction vs hand-crafted features for ranking on Yambda-50M
+Requires-Python: <3.13,>=3.12
+Requires-Dist: polars>=1.30
+Requires-Dist: pyarrow>=18
+Requires-Dist: numpy>=2.0
+Requires-Dist: pandas>=2.2
+Requires-Dist: scipy>=1.14
+Requires-Dist: scikit-learn>=1.5
+Requires-Dist: lightgbm>=4.5
+Requires-Dist: optuna>=4.0
+Requires-Dist: implicit>=0.7.2
+Requires-Dist: shap>=0.46
+Requires-Dist: matplotlib>=3.9
+Requires-Dist: huggingface_hub>=0.25
+Requires-Dist: pyyaml>=6
+Requires-Dist: pytest>=8
+Requires-Dist: psutil>=6
+Provides-Extra: nn
+Requires-Dist: torch>=2.5; extra == "nn"
