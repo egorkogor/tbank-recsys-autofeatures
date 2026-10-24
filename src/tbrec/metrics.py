@@ -72,7 +72,19 @@ def paired_bootstrap(df: pl.DataFrame, scores: list[str], base: str, n: int = 10
         res[s]["d_gauc_ci"] = np.percentile(d[:, 0], [2.5, 97.5]).tolist()
         res[s]["d_ndcg10"] = res[s]["ndcg10"] - res[base]["ndcg10"]
         res[s]["d_ndcg10_ci"] = np.percentile(d[:, 1], [2.5, 97.5]).tolist()
+        for j, m in enumerate(["gauc", "ndcg10"]):  # two-sided bootstrap p-value of delta != 0
+            res[s][f"p_{m}"] = float(min(1.0, 2 * (min((d[:, j] <= 0).sum(), (d[:, j] >= 0).sum()) + 1) / (n + 1)))
     return res
+
+
+def holm(pvals: dict) -> dict:
+    """Holm-Bonferroni adjusted p-values (family = the hypotheses fixed in the freeze)."""
+    order = sorted(pvals, key=pvals.get)
+    out, run = {}, 0.0
+    for i, k in enumerate(order):
+        run = max(run, min(1.0, (len(order) - i) * pvals[k]))
+        out[k] = run
+    return out
 
 
 # Decision words, fixed before the OOT run (plan section 6).

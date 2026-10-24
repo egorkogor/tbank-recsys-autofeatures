@@ -8,7 +8,7 @@ step() { local name=$1; shift; echo "$(date +%H:%M:%S) start $name"; "$@" > "log
 
 until [ -f artifacts/kion/features/grammar_decay.cost.json ]; do sleep 20; done
 step choose_objective  $PY scripts/choose_objective.py
-step trivial_ials      $PY scripts/run_branch.py trivial_ials_rank --stage val
+step trivial_ials      $PY scripts/run_branch.py trivial_ials_score --stage val
 step trivial_pop       $PY scripts/run_branch.py trivial_pop_rank --stage val
 step run_base_only_val $PY scripts/run_branch.py base_only --stage val
 step run_b0_val        $PY scripts/run_branch.py b0 --stage val
@@ -21,5 +21,5 @@ step feat_r1_window    $PY scripts/kion_features.py names --names-file artifacts
 step run_r1_window_val $PY scripts/run_branch.py r1_window --stage val
 step run_r1_decay_k33_val  $PY scripts/run_branch.py r1_decay_k33 --stage val
 step run_r1_window_k33_val $PY scripts/run_branch.py r1_window_k33 --stage val
-step compare_val_B     $PY scripts/compare.py --stage val --part val_B --base b0 b0 base_only r1_decay r1_window r1_decay_k33 r1_window_k33 trivial_ials_rank trivial_pop_rank
+step compare_val_B     $PY scripts/compare.py --stage val --part val_B --base b0 b0 base_only r1_decay r1_window r1_decay_k33 r1_window_k33 trivial_ials_score trivial_pop_rank
 echo "$(date +%H:%M:%S) kion queue finished"

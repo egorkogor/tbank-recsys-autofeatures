@@ -49,3 +49,15 @@ def test_generic_invariant(log):
     full = G.snapshot(rows, log, names, cutoff, s).sort("row")
     assert full.equals(G.snapshot(rows, log.filter(pl.col("t") < cutoff), names, cutoff, s).sort("row"))
     assert full.equals(G.snapshot(rows, scramble_future(log, cutoff), names, cutoff, s).sort("row"))
+
+
+def test_context_invariant(log):
+    # request-time context: features use history before the cutoff plus the row's own time only
+    from tbrec import context
+
+    rows, cutoff = context.add(_rows(log)), day_start(DAY_TESTED)
+    s, names = context.schema(), context.B0_CTX + context.grammar(["h7d", "all"])[:150]
+    full = G.snapshot(rows, context.add(log), names, cutoff, s).sort("row")
+    cut = G.snapshot(rows, context.add(log.filter(pl.col("t") < cutoff)), names, cutoff, s).sort("row")
+    scr = G.snapshot(rows, context.add(scramble_future(log, cutoff)), names, cutoff, s).sort("row")
+    assert full.equals(cut) and full.equals(scr)

@@ -41,10 +41,12 @@ def schema() -> Schema:
 def enrich(df: pl.DataFrame) -> pl.DataFrame:
     """Attach static user and item attributes (needed by single-valued attribute keys)."""
     users = pl.read_parquet(PROC / "users.parquet").select(["uid"] + USER_ATTRS)
-    items = pl.read_parquet(PROC / "items.parquet").select(["item"] + ITEM_ATTRS)
-    df = df.drop([c for c in USER_ATTRS + ITEM_ATTRS if c in df.columns])
-    return (df.join(users, on="uid", how="left").join(items, on="item", how="left")
-            .with_columns([pl.col(c).fill_null(0) for c in USER_ATTRS + ITEM_ATTRS]))
+    items = pl.read_parquet(PROC / "items.parquet").select(["item"] + ITEM_ATTRS + ["release_year"])
+    df = df.drop([c for c in USER_ATTRS + ITEM_ATTRS + ["release_year", "years_since_release"] if c in df.columns])
+    df = (df.join(users, on="uid", how="left").join(items, on="item", how="left")
+          .with_columns([pl.col(c).fill_null(0) for c in USER_ATTRS + ITEM_ATTRS]))
+    # release date: years between the release year and the row's (or event's) day; START = 2021-03-13
+    return df.with_columns((2021.195 + pl.col("day").cast(pl.Float32) / 365.25 - pl.col("release_year")).alias("years_since_release"))
 
 
 def load_events() -> pl.DataFrame:
@@ -53,7 +55,7 @@ def load_events() -> pl.DataFrame:
 
 # Shared by every KION branch: candidate-generator signals and static attributes (not searched).
 BASE = ["I__view__age__all", "U__view__age__all"]
-STATIC = ["cand_pop_rank", "cand_ials_rank", "cand_ials_score"] + USER_ATTRS + ITEM_ATTRS
+STATIC = ["cand_pop_rank", "cand_ials_rank", "cand_ials_score"] + USER_ATTRS + ITEM_ATTRS + ["release_year", "years_since_release"]
 
 # Hand-made KION baseline: what a competitor would write (windows 7 / 30 days and all time).
 B0 = [

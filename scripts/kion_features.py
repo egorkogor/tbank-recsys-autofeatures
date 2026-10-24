@@ -1,4 +1,4 @@
-"""KION feature tables with the schema-driven engine (run with TBREC_DATASET=kion).
+"""KION / X5 feature tables with the schema-driven engine (TBREC_DATASET=kion or x5).
 
   python scripts/kion_features.py b0                      # STATIC + BASE + B0 on all rows
   python scripts/kion_features.py grammar --grid decay    # whole grammar on the selection rows
@@ -16,10 +16,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import tbrec  # noqa: E402,F401
 import polars as pl  # noqa: E402
 
-from tbrec import generic, kion  # noqa: E402
+from tbrec import generic, kion, x5  # noqa: E402
 from tbrec.config import ART, DATASET, STAGES  # noqa: E402
 
-assert DATASET == "kion"
+assert DATASET in ("kion", "x5")
+kion = {"kion": kion, "x5": x5}[DATASET]  # the dataset module: schema, enrich, BASE, B0, STATIC
 FEAT = ART / "features"
 
 

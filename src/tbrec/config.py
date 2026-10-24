@@ -29,11 +29,11 @@ if DATASET == "yambda":
         "val": dict(train=list(range(273, 287)), eval=list(range(287, 294)), first_stage_before=273),
         "oot": dict(train=list(range(280, 294)), eval=list(range(294, 301)), first_stage_before=280),
     }
-elif DATASET == "kion":
-    RAW = ROOT / "data" / "raw" / "kion"
-    PROC = ROOT / "data" / "processed" / "kion"
-    ART = ROOT / "artifacts" / "kion"
-    OFFSET = 0  # KION has dates only: t = day * DAY, day d starts at d * DAY
+elif DATASET in ("kion", "x5"):
+    RAW = ROOT / "data" / "raw" / DATASET
+    PROC = ROOT / "data" / "processed" / DATASET
+    ART = ROOT / "artifacts" / DATASET
+    OFFSET = 0  # KION has dates only (t = day * DAY); X5 seconds from 2018-11-21 00:00; day d starts at d * DAY
     _st = ART / "stages.json"
     # A row's "day" is the start of its target week; the label is a view in [day, day + 7).
     STAGES = ({k: v for k, v in json.loads(_st.read_text()).items() if k in ("val", "oot")} if _st.exists() else {})

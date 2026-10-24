@@ -64,7 +64,8 @@ def prepare(log=print) -> None:
     for name, s in [("content_type", items["content_type"]), ("release_decade", decade),
                     ("age_rating", items["age_rating"]), ("for_kids", items["for_kids"])]:
         cols[name], dicts[name] = _codes(s.cast(pl.Utf8))
-    pl.DataFrame({"item": items["item"], **cols}).write_parquet(PROC / "items.parquet")
+    year = items["release_year"].cast(pl.Float64, strict=False).cast(pl.Float32).alias("release_year")
+    pl.DataFrame({"item": items["item"], **cols}).with_columns(year).write_parquet(PROC / "items.parquet")
     for attr, src in [("genre", "genres"), ("country", "countries"), ("director", "directors_translated"),
                       ("actor", "actors_translated"), ("studio", "studios")]:
         x = (items.select("item", pl.col(src).fill_null("").str.split(",").alias("v")).explode("v")
