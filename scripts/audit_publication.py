@@ -1,4 +1,5 @@
 """Read-only publication audit; report locations and categories, never matching values."""
+import argparse
 import json
 import re
 import subprocess
@@ -6,8 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PATTERNS = {
     "credential_keyword": re.compile(r"token|api_key|apikey|secret|password|sk-|ghp_|hf_", re.I),
-    "local_path": re.compile(r"C:[/\\]Users|D:[/\\]PdM_Projects|AppData", re.I),
-    "personal_project": re.compile(r"(?!)"),
+    "local_path": re.compile(r"(?<![A-Za-z0-9])(?:[A-Z]:[/\\]|/(?:Users|home)/)", re.I),
     "credential_shape": re.compile(r"(?<![A-Za-z0-9])(?:gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9_-]{20,}|hf_[A-Za-z0-9]{20,})"),
 }
 
@@ -24,6 +24,11 @@ def scan(data):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--project-term", action="append", default=[], help="Optional private project marker; supplied at runtime, never stored as a default")
+    args = parser.parse_args()
+    if args.project_term:
+        PATTERNS["personal_project"] = re.compile(r"(?<!\w)(?:" + "|".join(re.escape(t) for t in args.project_term) + r")(?!\w)", re.I)
     files = git("ls-files", "-z").decode().split("\x00")[:-1]
     current = {}; oversized = []; raw_candidates = []; csv_headers = {}
     for name in files:

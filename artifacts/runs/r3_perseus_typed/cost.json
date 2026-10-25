@@ -52,7 +52,7 @@
     "item_encoder_unk_row_fraction": 0.06349519220166289,
     "inference_seconds": 38.441743800009135,
     "inference_seconds_per_1000_rows": 0.052987428875472975,
-    "path": "D:\\PdM_Projects\\tbank-recsys-autofeatures\\artifacts\\runs\\r3_perseus_typed\\pred_val.parquet",
+    "path": "artifacts/runs/r3_perseus_typed/pred_val.parquet",
     "metrics_computed": false,
     "freeze_gate_present_at_start": null,
     "peak_allocated_bytes": 251486720,
