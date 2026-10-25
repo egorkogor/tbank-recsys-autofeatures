@@ -1,0 +1,13 @@
+{
+ "params": {
+  "num_leaves": 19,
+  "min_data_in_leaf": 685,
+  "feature_fraction": 0.7343655743380758,
+  "lambda_l2": 0.030802781703491506,
+  "learning_rate": 0.02226970485013611
+ },
+ "objective": "lambdarank",
+ "label": "0/1/2 ladder",
+ "rounds": 617,
+ "seconds": 196
+}
