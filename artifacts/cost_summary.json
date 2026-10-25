@@ -1,0 +1,51 @@
+{
+  "scope": "existing val run; feature build covers 28 prebuilt days; excludes download, unmeasured preparation, objective selection, other branches and OOT run",
+  "stages": {
+    "b0_features": {
+      "seconds": 775,
+      "source": "logs/feat_b0.log",
+      "source_first": "b0: 58 features, 2853323 rows, 28 days",
+      "source_last": "done (2853323, 66) 775s"
+    },
+    "grammar_decay": {
+      "seconds": 1438,
+      "source": "logs/feat_grammar_decay.log",
+      "source_first": "grammar_decay: 1127 features, 365151 rows, 9 days",
+      "source_last": "done (365151, 1128) 1438s"
+    },
+    "r1_features": {
+      "seconds": 1296,
+      "source": "logs/feat_r1_decay.log",
+      "source_first": "r1_decay: 96 features, 2853323 rows, 28 days",
+      "source_last": "done (2853323, 97) 1296s"
+    },
+    "search": {
+      "seconds": 383,
+      "source": "logs/search_r1_decay.log",
+      "source_first": "08:12:17 decay: 1125 candidates, selection train 164664, val_A 200487",
+      "source_last": "08:18:40 chosen K=96: weights {'h365d': 9, 'all': 29, 'h90d': 15, 'h30d': 8, 'h3d': 7, 'h7d': 7, 'h1d': 7, 'h6h': 6, 'h14d': 8}, keys {'UI': 13, 'U': 21, 'UA': 16, 'I': 13, 'A': 17, 'L': 10, 'UL': 6}",
+      "measurement": "timestamp interval; excludes process startup"
+    }
+  },
+  "b0": {
+    "source": "artifacts/runs/b0/cost_val.json",
+    "load": 1.5121030807495117,
+    "tune": 1002.2179307937622,
+    "fit": 344.97625207901,
+    "predict": 21.807018518447876,
+    "predict_per_1k_rows": 0.030058413810356444,
+    "params_source": "artifacts/runs/b0/params.json"
+  },
+  "r1_decay": {
+    "source": "artifacts/runs/r1_decay/cost_val.json",
+    "load": 2.3566911220550537,
+    "tune": 855.7684922218323,
+    "fit": 407.2834281921387,
+    "predict": 24.597431421279907,
+    "predict_per_1k_rows": 0.033904670265090406,
+    "params_source": "artifacts/runs/r1_decay/params.json"
+  },
+  "preparation_seconds": null,
+  "b0_measured_subtotal_seconds": 2145.5133044719696,
+  "r1_measured_subtotal_seconds": 5182.006042957306
+}

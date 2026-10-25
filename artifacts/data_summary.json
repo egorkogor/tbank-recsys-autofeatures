@@ -1,0 +1,164 @@
+{
+  "scope": "post-freeze descriptive inventory; no new OOT label statistics, fitting or scoring",
+  "domains": {
+    "yambda": {
+      "events": 47790449,
+      "users_events": 10000,
+      "items_events": 934057,
+      "day_min": 0,
+      "day_max": 300,
+      "users_listens": 9238,
+      "task_rows_total": 2853323,
+      "task_users_total": 7866,
+      "task_items_total": 227452,
+      "splits": {
+        "train": {
+          "days": [
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            279,
+            280,
+            281,
+            282,
+            283,
+            284,
+            285,
+            286
+          ],
+          "rows": 1398886,
+          "users": 6844,
+          "items": 166613,
+          "positive_share": 0.6783669291135946
+        },
+        "val": {
+          "days": [
+            287,
+            288,
+            289,
+            290,
+            291,
+            292,
+            293
+          ],
+          "rows": 725488,
+          "users": 6283,
+          "items": 125609,
+          "positive_share": 0.6930066382903646
+        },
+        "oot": {
+          "days": [
+            294,
+            295,
+            296,
+            297,
+            298,
+            299,
+            300
+          ],
+          "rows": 728949,
+          "users": 6167,
+          "items": 127626
+        }
+      },
+      "sources": [
+        "data/processed/events.parquet",
+        "artifacts/rows.parquet",
+        "src/tbrec/config.py"
+      ]
+    },
+    "kion": {
+      "events": 169376,
+      "users_events": 30000,
+      "items_events": 7029,
+      "day_min": 0,
+      "day_max": 162,
+      "task_rows_total": 1411573,
+      "task_users_total": 8639,
+      "task_items_total": 1216,
+      "splits": {
+        "train": {
+          "days": [
+            128,
+            135,
+            142
+          ],
+          "rows": 802635,
+          "users": 6032,
+          "items": 1127,
+          "positive_share": 0.010932740286680745
+        },
+        "val": {
+          "days": [
+            149
+          ],
+          "rows": 298935,
+          "users": 3304,
+          "items": 995,
+          "positive_share": 0.010754846371284727
+        },
+        "oot": {
+          "days": [
+            156
+          ],
+          "rows": 310003,
+          "users": 3459,
+          "items": 978
+        }
+      },
+      "sources": [
+        "data/processed/kion/events.parquet",
+        "artifacts/kion/rows.parquet",
+        "artifacts/kion/stages.json"
+      ]
+    },
+    "x5": {
+      "events": 1155113,
+      "users_events": 10000,
+      "items_events": 28085,
+      "day_min": 0,
+      "day_max": 117,
+      "task_rows_total": 2784388,
+      "task_users_total": 9743,
+      "task_items_total": 24412,
+      "splits": {
+        "train": {
+          "days": [
+            83,
+            90,
+            97
+          ],
+          "rows": 1637335,
+          "users": 8780,
+          "items": 22764,
+          "positive_share": 0.05288410740624246
+        },
+        "val": {
+          "days": [
+            104
+          ],
+          "rows": 605782,
+          "users": 7010,
+          "items": 20246,
+          "positive_share": 0.049857869662683935
+        },
+        "oot": {
+          "days": [
+            111
+          ],
+          "rows": 541271,
+          "users": 6187,
+          "items": 19741
+        }
+      },
+      "sources": [
+        "data/processed/x5/events.parquet",
+        "artifacts/x5/rows.parquet",
+        "artifacts/x5/stages.json"
+      ]
+    }
+  }
+}
