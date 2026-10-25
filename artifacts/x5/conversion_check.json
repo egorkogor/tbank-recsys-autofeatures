@@ -1,0 +1,96 @@
+{
+  "dataset": "X5 RetailHero public mirror",
+  "source_commit": "7744156a4f89f4828607921e8c9668f04801f4de",
+  "scope": "raw data conversion only; no labels, training or scoring",
+  "conversion": {
+    "all_columns": "string",
+    "keep_default_na": false,
+    "chunk_rows": 200000,
+    "compression": "zstd",
+    "write_statistics": false
+  },
+  "versions": {
+    "pandas": "3.1.0",
+    "pyarrow": "26.0.0"
+  },
+  "files": [
+    {
+      "name": "clients",
+      "status": "converted_from_verified_public_csv",
+      "source_csv_gz_sha256": "b8985170e03dc65fa532fb6b8ca6dd70ea5c30c35ea7c1019ee6ea2034d04099",
+      "rows": 400162,
+      "columns": [
+        "client_id",
+        "first_issue_date",
+        "first_redeem_date",
+        "age",
+        "gender"
+      ],
+      "parquet_sha256": "98a36c1a24d694e73d83cd85055aa3c4214fb9576a3f61448ce04f61346ec278",
+      "historical_parquet_sha256": "0798cb7e97b373b56b4cfcc537383fedc3fc9f0e7d0e7725c4cf4b540a64bd88",
+      "byte_equal_to_historical": false,
+      "all_values_equal_to_historical": true,
+      "seconds": 10.023,
+      "historical_writer": "parquet-cpp-arrow version 25.0.1",
+      "historical_pandas_version": "2.2.3"
+    },
+    {
+      "name": "products",
+      "status": "converted_from_verified_public_csv",
+      "source_csv_gz_sha256": "6b72e025ff77974940ebdba63998a4349ae290a33efeb41f29989fdea6e96573",
+      "rows": 43038,
+      "columns": [
+        "product_id",
+        "level_1",
+        "level_2",
+        "level_3",
+        "level_4",
+        "segment_id",
+        "brand_id",
+        "vendor_id",
+        "netto",
+        "is_own_trademark",
+        "is_alcohol"
+      ],
+      "parquet_sha256": "4161c1788d17e6cfca58c90a9b7f6d57cc1ac2f1731d6a8679a4df2b9ea1a3bf",
+      "historical_parquet_sha256": "cb00db9e6c6f3c38f3d67a924041e75189850e3164513c2c8bad7be12d902e10",
+      "byte_equal_to_historical": false,
+      "all_values_equal_to_historical": true,
+      "seconds": 4.375,
+      "historical_writer": "parquet-cpp-arrow version 25.0.1",
+      "historical_pandas_version": "2.2.3"
+    },
+    {
+      "name": "purchases",
+      "status": "converted_from_verified_public_csv",
+      "source_csv_gz_sha256": "1342e14e1aa9d39dc242f1b66c903f0576fd184af9dc5a3bbe932607dc2d8aba",
+      "rows": 45786568,
+      "columns": [
+        "client_id",
+        "transaction_id",
+        "transaction_datetime",
+        "regular_points_received",
+        "express_points_received",
+        "regular_points_spent",
+        "express_points_spent",
+        "purchase_sum",
+        "store_id",
+        "product_id",
+        "product_quantity",
+        "trn_sum_from_iss",
+        "trn_sum_from_red"
+      ],
+      "parquet_sha256": "fd14a92a7634bc153c0c829627976b9bff3385d6d8b47e71532bc53e636a058f",
+      "historical_parquet_sha256": "6102e0de4a0bf5ad4b0a77a48672b408ce4ca812a8e48c231e6f8f3f0975fb39",
+      "byte_equal_to_historical": false,
+      "all_values_equal_to_historical": true,
+      "seconds": 656.496,
+      "historical_writer": "parquet-cpp-arrow version 25.0.1",
+      "historical_pandas_version": "2.2.3"
+    }
+  ],
+  "verified_on": "2026-10-25",
+  "post_freeze": true,
+  "outside_hypothesis_family": true,
+  "original_raw_files_replaced": false
+}
