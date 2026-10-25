@@ -1,8 +1,9 @@
 {
  "repeat_agreement": {
-  "pairs": 157509,
-  "same_outcome": 0.699667955481909,
-  "listen_plus_share": 0.6892850897006754
+  "pairs": 110100,
+  "same_outcome": 0.6863215258855586,
+  "chance_same_outcome": 0.5146826805125553,
+  "listen_plus_share_rows": 0.6833664881984057
  },
  "session_vs_double_logging": {
   "rows": 363869,

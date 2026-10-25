@@ -107,9 +107,10 @@ def main():
             ax.set_title(f"{title} · {mname}", loc="left", fontsize=10, color=TEXT, pad=6)
     fig.legend(handles=[Line2D([], [], marker="o", color=c, lw=2, ms=7, mec=SURFACE, label=n) for n, c in FAMILIES.values()],
                loc="upper left", bbox_to_anchor=(0.01, 0.985), ncol=4, frameon=False, fontsize=9, handlelength=1.6)
-    fig.text(0.01, 0.945, "Разница с B0 на OOT (точка) и 95% ДИ парного бутстрэпа по пользователям. Вправо от нуля — лучше B0. "
-             "Шкалы у панелей свои.", fontsize=8.5, color=TEXT2)
-    fig.subplots_adjust(left=0.2, right=0.965, top=0.9, bottom=0.04)
+    fig.text(0.01, 0.928, "Разница с B0 на OOT (точка) и 95% ДИ парного бутстрэпа по пользователям, без поправки на множественность\n"
+             "(вердикты с поправкой Холма — README, раздел 7.4). Вправо от нуля — выше B0. Шкалы у панелей свои.",
+             fontsize=8.5, color=TEXT2, linespacing=1.4)
+    fig.subplots_adjust(left=0.2, right=0.965, top=0.885, bottom=0.04)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT, dpi=170, facecolor=SURFACE)
     print(OUT)

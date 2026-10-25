@@ -1,12 +1,15 @@
-"""Two data checks behind README statements (Yambda; val stage only, nothing is trained or scored anew).
+"""Two data checks behind README statements (Yambda; days before OOT only, nothing is trained or scored anew).
 
   python scripts/label_checks.py
 
 1. Label noise: when the feed plays the same track to a user twice in a day, how often do both plays have the
-   same Listen+ outcome (task rows, days 273-300; consecutive plays of one (user, day, track)).
+   same Listen+ outcome (task rows, days 273-293; consecutive impressions of one (user, day, track), the later
+   strictly later in time). Chance agreement is computed from the outcome shares of the pairs themselves.
 2. Session branch vs double logging: GAUC of b0 and b0_sess on val-B, on all rows and without rows whose track
-   was already played to the user earlier that day (anywhere earlier / in the immediately preceding 5-second bin).
-   If the session gain came from the same play logged twice, it would vanish without those rows.
+   was already played to the user earlier that day (anywhere earlier / at the user's previous listening moment,
+   i.e. the previous occupied 5-second bin, which may be minutes or hours earlier). If the session gain came from
+   the same play logged twice, it would vanish without those rows. This tests only that narrow hypothesis:
+   misaligned features are the job of the invariance tests (tests/test_generic.py).
 
 Writes artifacts/label_checks.json.
 """
@@ -22,14 +25,17 @@ from tbrec.config import ART, PROC  # noqa: E402
 from tbrec.metrics import paired_bootstrap  # noqa: E402
 
 VAL_DAYS = (287, 293)
+LAST_DAY_BEFORE_OOT = 293
 
 
 def repeat_agreement(rows: pl.DataFrame) -> dict:
-    r = (rows.sort("uid", "day", "item", "t")
-         .with_columns(pl.col("y").shift(1).over("uid", "day", "item").alias("y_prev")))
-    p = r.filter(pl.col("y_prev").is_not_null())
+    r = (rows.filter(pl.col("day") <= LAST_DAY_BEFORE_OOT).sort("uid", "day", "item", "t")
+         .with_columns(pl.col("y").shift(1).over("uid", "day", "item").alias("y_prev"),
+                       pl.col("t").shift(1).over("uid", "day", "item").alias("t_prev")))
+    p = r.filter(pl.col("t_prev").is_not_null() & (pl.col("t_prev") < pl.col("t")))
+    a, b = float(p["y_prev"].mean()), float(p["y"].mean())
     return {"pairs": p.height, "same_outcome": float((p["y"] == p["y_prev"]).mean()),
-            "listen_plus_share": float(rows["y"].mean())}
+            "chance_same_outcome": a * b + (1 - a) * (1 - b), "listen_plus_share_rows": float(r["y"].mean())}
 
 
 def session_check(rows: pl.DataFrame) -> dict:
@@ -48,7 +54,10 @@ def session_check(rows: pl.DataFrame) -> dict:
          .with_columns((pl.col("t_first") < pl.col("t")).alias("seen_today"))
          .join(prev_same, on="row", how="left"))
     for b in ("b0", "b0_sess"):
-        v = v.join(pl.read_parquet(ART / "runs" / b / "pred_val.parquet").rename({"score": b}), on="row", how="left")
+        pred = pl.read_parquet(ART / "runs" / b / "pred_val.parquet")
+        assert pred["row"].is_unique().all(), b
+        v = v.join(pred.rename({"score": b}), on="row", how="left")
+    assert v.height == v["row"].n_unique() and v.select(pl.col("b0", "b0_sess").null_count()).sum_horizontal().item() == 0
     out = {"rows": v.height, "share_seen_today": float(v["seen_today"].mean()),
            "share_prev_bin_same_track": float(v["prev_same"].mean())}
     for name, sub in {"all": v, "without_seen_today": v.filter(~pl.col("seen_today")),

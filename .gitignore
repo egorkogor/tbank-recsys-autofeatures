@@ -22,6 +22,7 @@ external/*
 external/perseus_adapter/*
 !external/perseus_adapter/*.py
 !external/probe_env.ps1
+!external/probe_runtime.py
 !external/perseus_cu126.patch
 
 logs/*
