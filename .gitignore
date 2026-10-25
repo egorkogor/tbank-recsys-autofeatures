@@ -1,5 +1,17 @@
 data/
-artifacts/
+# artifacts: data, features, models and predictions stay local; small result files (tables, freeze manifest,
+# per-branch params, metrics, costs, importances) are tracked so the README links resolve
+artifacts/**
+!artifacts/**/
+!artifacts/*.md
+!artifacts/*.json
+!artifacts/*.txt
+!artifacts/kion/*.md
+!artifacts/kion/*.json
+!artifacts/x5/*.md
+!artifacts/x5/*.json
+!artifacts/**/runs/*/*.json
+!artifacts/**/runs/*/importance_*.csv
 .venv/
 __pycache__/
 *.pyc

@@ -1,0 +1,346 @@
+{
+ "grid": "window",
+ "k": 96,
+ "names": [
+  "UI__lp__rate__w365d",
+  "UI__skip__rate__w365d",
+  "UI__lp__cnt__w365d",
+  "UI__listen__mpr__w365d",
+  "UI__skip__rate__all",
+  "U__algo__mpr__w90d",
+  "UI__lp__rate__all",
+  "U__algo__cnt__w365d",
+  "UA__algo__mpr__w90d",
+  "UI__listen__mpr__w90d",
+  "UI__org__age__all",
+  "I__lp__rate__w14d",
+  "I__listen__mpr__w90d",
+  "I__lp__rate__w7d",
+  "A__dislike__rate__w3d",
+  "UI__lp__rate__w90d",
+  "UA__algo__mpr__w365d",
+  "I__algo__mpr__w14d",
+  "UA__org__age__all",
+  "A__org__mpr__w1d",
+  "UA__listen__mpr__w14d",
+  "I__dislike__rate__w365d",
+  "U__algo__mpr__w365d",
+  "A__dislike__age__all",
+  "U__dislike__age__all",
+  "UA__algo__age__all",
+  "U__lp__nuniq__w90d",
+  "L__org__mpr__w1d",
+  "U__algo__mpr__w30d",
+  "UA__skip__rate__w14d",
+  "I__org__mpr__w14d",
+  "U__like__rate__w365d",
+  "I__lp__rate__w30d",
+  "I__org__mpr__w1d",
+  "I__like__rate__w90d",
+  "I__skip__rec__all",
+  "U__algo__mpr__w7d",
+  "L__dislike__rate__w365d",
+  "I__like__rate__w3d",
+  "U__lp__cnt__w90d",
+  "UA__org__mpr__w365d",
+  "UL__algo__mpr__w90d",
+  "L__like__rate__w14d",
+  "A__like__rate__w365d",
+  "U__algo__mpr__w3d",
+  "U__lp__rate__w90d",
+  "UI__skip__rate__w30d",
+  "I__org__mpr__w30d",
+  "U__lp__nuniq__w30d",
+  "I__dislike__age__all",
+  "U__dislike__rec__all",
+  "U__listen__mpr__w1d",
+  "A__dislike__rate__w365d",
+  "U__lp__cnt__w365d",
+  "L__algo__mpr__w1d",
+  "U__org__mpr__w365d",
+  "A__algo__mpr__w1d",
+  "A__lp__rate__w6h",
+  "I__org__rate__w6h",
+  "A__dislike__rate__w1d",
+  "U__algo__cnt__w90d",
+  "U__listen__nuniq__w365d",
+  "UL__algo__mpr__w365d",
+  "I__like__age__all",
+  "UL__like__rate__w365d",
+  "A__skip__rate__w1d",
+  "I__like__rate__w365d",
+  "UA__algo__mpr__w30d",
+  "I__org__mpr__w3d",
+  "L__dislike__rate__w30d",
+  "I__skip__rate__w1d",
+  "L__org__mpr__w365d",
+  "A__algo__mpr__w14d",
+  "L__algo__mpr__w3d",
+  "L__algo__mpr__w30d",
+  "U__skip__rate__w365d",
+  "UA__skip__rate__w365d",
+  "A__like__rec__all",
+  "L__listen__mpr__w1d",
+  "U__algo__mpr__w14d",
+  "I__algo__mpr__w90d",
+  "UA__lp__rate__w365d",
+  "I__algo__mpr__w3d",
+  "A__dislike__rate__w14d",
+  "A__like__rate__w3d",
+  "A__org__mpr__w30d",
+  "A__algo__mpr__w7d",
+  "U__lp__nuniq__w365d",
+  "I__like__rec__all",
+  "A__org__mpr__w90d",
+  "I__algo__mpr__w1d",
+  "UA__algo__rec__all",
+  "A__dislike__rate__w7d",
+  "UA__lp__rate__w14d",
+  "A__listen__mpr__w6h",
+  "I__listen__mpr__w1d"
+ ],
+ "curve": {
+  "8": 0.5653861663408771,
+  "16": 0.576883420342954,
+  "24": 0.5776355182717245,
+  "32": 0.5767368646509383,
+  "48": 0.5758227741369597,
+  "64": 0.5765920868221306,
+  "96": 0.5782673515697873,
+  "128": 0.5770019679459591
+ },
+ "gauc_base_only": 0.5319165380072891,
+ "gauc_all_candidates": 0.5811304310822367,
+ "weights": {
+  "w365d": 24,
+  "all": 14,
+  "w90d": 13,
+  "w14d": 10,
+  "w7d": 4,
+  "w3d": 7,
+  "w1d": 12,
+  "w30d": 9,
+  "w6h": 3
+ },
+ "keys": {
+  "UI": 10,
+  "U": 21,
+  "UA": 12,
+  "I": 23,
+  "A": 18,
+  "L": 9,
+  "UL": 3
+ },
+ "aggs": {
+  "rate": 35,
+  "cnt": 5,
+  "mpr": 40,
+  "age": 7,
+  "nuniq": 4,
+  "rec": 5
+ },
+ "importance_top50": [
+  [
+   "UI__lp__rate__w365d",
+   1214.4744024276733
+  ],
+  [
+   "UI__skip__rate__w365d",
+   589.6651179790497
+  ],
+  [
+   "track_len",
+   418.980099439621
+  ],
+  [
+   "UI__lp__cnt__w365d",
+   335.6298062801361
+  ],
+  [
+   "UI__listen__mpr__w365d",
+   301.71012234687805
+  ],
+  [
+   "UI__skip__rate__all",
+   295.40320777893066
+  ],
+  [
+   "U__algo__mpr__w90d",
+   236.78119015693665
+  ],
+  [
+   "UI__lp__rate__all",
+   234.37540888786316
+  ],
+  [
+   "U__algo__cnt__w365d",
+   204.87535905838013
+  ],
+  [
+   "UA__algo__mpr__w90d",
+   181.76561975479126
+  ],
+  [
+   "UI__listen__mpr__w90d",
+   180.79123973846436
+  ],
+  [
+   "UI__org__age__all",
+   178.84506034851074
+  ],
+  [
+   "I__lp__rate__w14d",
+   171.08809757232666
+  ],
+  [
+   "I__listen__mpr__w90d",
+   171.0462007522583
+  ],
+  [
+   "I__lp__rate__w7d",
+   169.75527024269104
+  ],
+  [
+   "A__dislike__rate__w3d",
+   165.2445387840271
+  ],
+  [
+   "UI__lp__rate__w90d",
+   161.91156721115112
+  ],
+  [
+   "UA__algo__mpr__w365d",
+   159.75224900245667
+  ],
+  [
+   "I__algo__mpr__w14d",
+   155.15312957763672
+  ],
+  [
+   "UA__org__age__all",
+   148.4902684688568
+  ],
+  [
+   "A__org__mpr__w1d",
+   145.71695923805237
+  ],
+  [
+   "UA__listen__mpr__w14d",
+   143.85279083251953
+  ],
+  [
+   "I__dislike__rate__w365d",
+   141.6404402256012
+  ],
+  [
+   "U__algo__mpr__w365d",
+   140.86393022537231
+  ],
+  [
+   "A__dislike__age__all",
+   134.9560089111328
+  ],
+  [
+   "U__dislike__age__all",
+   133.8845911026001
+  ],
+  [
+   "UA__algo__age__all",
+   132.40010976791382
+  ],
+  [
+   "U__lp__nuniq__w90d",
+   128.6025104522705
+  ],
+  [
+   "L__org__mpr__w1d",
+   128.33384037017822
+  ],
+  [
+   "U__algo__mpr__w30d",
+   124.11255049705505
+  ],
+  [
+   "UA__skip__rate__w14d",
+   123.54069113731384
+  ],
+  [
+   "I__org__mpr__w14d",
+   120.73157000541687
+  ],
+  [
+   "U__like__rate__w365d",
+   116.27249956130981
+  ],
+  [
+   "I__lp__rate__w30d",
+   114.22960925102234
+  ],
+  [
+   "I__org__mpr__w1d",
+   110.69922995567322
+  ],
+  [
+   "I__like__rate__w90d",
+   109.9696295261383
+  ],
+  [
+   "I__skip__rec__all",
+   109.87378907203674
+  ],
+  [
+   "U__algo__mpr__w7d",
+   109.43618941307068
+  ],
+  [
+   "L__dislike__rate__w365d",
+   109.26649904251099
+  ],
+  [
+   "I__like__rate__w3d",
+   109.03745865821838
+  ],
+  [
+   "U__lp__cnt__w90d",
+   108.14928030967712
+  ],
+  [
+   "UA__org__mpr__w365d",
+   107.49400067329407
+  ],
+  [
+   "UL__algo__mpr__w90d",
+   107.21620035171509
+  ],
+  [
+   "L__like__rate__w14d",
+   105.69362998008728
+  ],
+  [
+   "A__like__rate__w365d",
+   105.48694014549255
+  ],
+  [
+   "U__algo__mpr__w3d",
+   104.97799158096313
+  ],
+  [
+   "U__lp__rate__w90d",
+   101.71488046646118
+  ],
+  [
+   "UI__skip__rate__w30d",
+   100.88401937484741
+  ],
+  [
+   "I__org__mpr__w30d",
+   100.37635970115662
+  ],
+  [
+   "U__lp__nuniq__w30d",
+   100.22977948188782
+  ]
+ ],
+ "search_seconds": 717.3574774265289,
+ "grammar_build_seconds": 826.4173717498779
+}

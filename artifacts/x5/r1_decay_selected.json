@@ -1,0 +1,324 @@
+{
+ "grid": "decay",
+ "k": 64,
+ "names": [
+  "I__buy__cnt__h7d",
+  "I__buy__cnt__h1d",
+  "UI__buy__cnt__h30d",
+  "I__buy__cnt__h14d",
+  "UI__buy__cnt__h90d",
+  "UI__buy__cnt__h180d",
+  "GEN_I__buy__cnt__h1d",
+  "I__points__cnt__h7d",
+  "UI__buy__age__all",
+  "UI__buy__cnt__h14d",
+  "AGE_I__buy__cnt__h1d",
+  "UI__buy__mpr__h1d",
+  "I__buy__rec__all",
+  "SEG__buy__cnt__h1d",
+  "L4__buy__cnt__h7d",
+  "SEG__buy__cnt__h90d",
+  "U__buy__cnt__h90d",
+  "UBR__buy__cnt__h30d",
+  "UBR__buy__age__all",
+  "GEN_I__buy__rec__all",
+  "U__buy__cnt__h30d",
+  "I__points__cnt__h1d",
+  "UL4__buy__age__all",
+  "I__multi__cnt__h3d",
+  "AGE_I__buy__cnt__h7d",
+  "GEN_I__points__cnt__h14d",
+  "AGE_I__multi__age__all",
+  "U__buy__cnt__all",
+  "U__buy__cnt__h180d",
+  "UBR__buy__cnt__h90d",
+  "UI__buy__cnt__h1d",
+  "U__buy__cnt__h14d",
+  "L3__multi__nuniq__all",
+  "SEG__multi__cnt__h1d",
+  "UI__buy__mpr__h30d",
+  "AGE_I__buy__rec__all",
+  "UALC__buy__cnt__h14d",
+  "I__buy__cnt__h90d",
+  "AGE_I__points__age__all",
+  "BR__buy__cnt__h7d",
+  "AGE_L3__multi__rate__h14d",
+  "UALC__buy__cnt__h30d",
+  "UI__buy__cnt__h7d",
+  "U__buy__nuniq__all",
+  "UALC__buy__cnt__all",
+  "UOWN__buy__cnt__h7d",
+  "L4__buy__cnt__h14d",
+  "UOWN__buy__cnt__h180d",
+  "UL3__buy__age__all",
+  "UBR__buy__cnt__h180d",
+  "UL4__buy__rec__all",
+  "GEN_I__points__age__all",
+  "I__buy__cnt__h30d",
+  "UI__buy__rec__all",
+  "I__multi__rec__all",
+  "UOWN__buy__cnt__h14d",
+  "U__multi__cnt__h14d",
+  "UL4__points__rate__h7d",
+  "I__points__rate__h1d",
+  "L3__buy__nuniq__all",
+  "UBR__buy__mpr__all",
+  "I__multi__cnt__h1d",
+  "L2__points__rate__h14d",
+  "AGE_I__points__rec__all"
+ ],
+ "curve": {
+  "8": 0.8067388167416928,
+  "16": 0.8075490618294554,
+  "24": 0.8083381180225445,
+  "32": 0.80715492060959,
+  "48": 0.8100403075119426,
+  "64": 0.8105108925360437,
+  "96": 0.8098235579128638,
+  "128": 0.810661921091693
+ },
+ "gauc_base_only": 0.798487080663157,
+ "gauc_all_candidates": 0.8100036076780578,
+ "weights": {
+  "h7d": 8,
+  "h1d": 10,
+  "h30d": 6,
+  "h14d": 10,
+  "h90d": 5,
+  "h180d": 4,
+  "all": 20,
+  "h3d": 1
+ },
+ "keys": {
+  "I": 12,
+  "UI": 10,
+  "GEN_I": 4,
+  "AGE_I": 6,
+  "SEG": 3,
+  "L4": 2,
+  "U": 7,
+  "UBR": 5,
+  "UL4": 3,
+  "L3": 2,
+  "UALC": 3,
+  "BR": 1,
+  "AGE_L3": 1,
+  "UOWN": 3,
+  "UL3": 1,
+  "L2": 1
+ },
+ "aggs": {
+  "cnt": 40,
+  "age": 7,
+  "mpr": 3,
+  "rec": 7,
+  "nuniq": 3,
+  "rate": 4
+ },
+ "importance_top50": [
+  [
+   "cand_hist_rank",
+   75068.38163375854
+  ],
+  [
+   "I__buy__cnt__h7d",
+   5214.429616928101
+  ],
+  [
+   "I__buy__cnt__h1d",
+   4672.029213428497
+  ],
+  [
+   "UI__buy__cnt__h30d",
+   4324.066279888153
+  ],
+  [
+   "I__buy__cnt__h14d",
+   3195.734073638916
+  ],
+  [
+   "UI__buy__cnt__h90d",
+   3106.6447863578796
+  ],
+  [
+   "UI__buy__cnt__h180d",
+   2432.3887395858765
+  ],
+  [
+   "GEN_I__buy__cnt__h1d",
+   2201.995053291321
+  ],
+  [
+   "I__points__cnt__h7d",
+   1778.7842569351196
+  ],
+  [
+   "UI__buy__age__all",
+   1560.6647515296936
+  ],
+  [
+   "UI__buy__cnt__h14d",
+   1252.780249595642
+  ],
+  [
+   "AGE_I__buy__cnt__h1d",
+   1241.9485898017883
+  ],
+  [
+   "UI__buy__mpr__h1d",
+   1226.3313302993774
+  ],
+  [
+   "I__buy__rec__all",
+   923.0491151809692
+  ],
+  [
+   "cand_ials_score",
+   889.8347887992859
+  ],
+  [
+   "SEG__buy__cnt__h1d",
+   712.8299579620361
+  ],
+  [
+   "L4__buy__cnt__h7d",
+   551.4130058288574
+  ],
+  [
+   "I__buy__age__all",
+   547.8025197982788
+  ],
+  [
+   "SEG__buy__cnt__h90d",
+   518.5374898910522
+  ],
+  [
+   "U__buy__cnt__h90d",
+   461.22198581695557
+  ],
+  [
+   "UBR__buy__cnt__h30d",
+   460.73956203460693
+  ],
+  [
+   "UBR__buy__age__all",
+   454.29752922058105
+  ],
+  [
+   "GEN_I__buy__rec__all",
+   439.8744339942932
+  ],
+  [
+   "cand_ials_rank",
+   394.7247085571289
+  ],
+  [
+   "U__buy__cnt__h30d",
+   391.6457676887512
+  ],
+  [
+   "I__points__cnt__h1d",
+   383.34037590026855
+  ],
+  [
+   "UL4__buy__age__all",
+   379.79984998703003
+  ],
+  [
+   "I__multi__cnt__h3d",
+   379.251256942749
+  ],
+  [
+   "AGE_I__buy__cnt__h7d",
+   373.19850158691406
+  ],
+  [
+   "GEN_I__points__cnt__h14d",
+   368.82770347595215
+  ],
+  [
+   "AGE_I__multi__age__all",
+   365.06486082077026
+  ],
+  [
+   "U__buy__cnt__all",
+   342.71366786956787
+  ],
+  [
+   "U__buy__cnt__h180d",
+   325.1693162918091
+  ],
+  [
+   "UBR__buy__cnt__h90d",
+   319.8726706504822
+  ],
+  [
+   "UI__buy__cnt__h1d",
+   313.7976655960083
+  ],
+  [
+   "U__buy__cnt__h14d",
+   312.9881110191345
+  ],
+  [
+   "L3__multi__nuniq__all",
+   303.457227230072
+  ],
+  [
+   "SEG__multi__cnt__h1d",
+   301.39173221588135
+  ],
+  [
+   "UI__buy__mpr__h30d",
+   292.72862243652344
+  ],
+  [
+   "AGE_I__buy__rec__all",
+   282.3964686393738
+  ],
+  [
+   "UALC__buy__cnt__h14d",
+   275.53472900390625
+  ],
+  [
+   "I__buy__cnt__h90d",
+   271.24555015563965
+  ],
+  [
+   "AGE_I__points__age__all",
+   264.61091899871826
+  ],
+  [
+   "BR__buy__cnt__h7d",
+   261.6385827064514
+  ],
+  [
+   "AGE_L3__multi__rate__h14d",
+   259.6440086364746
+  ],
+  [
+   "UALC__buy__cnt__h30d",
+   256.4299478530884
+  ],
+  [
+   "UI__buy__cnt__h7d",
+   253.9272918701172
+  ],
+  [
+   "U__buy__nuniq__all",
+   253.69946718215942
+  ],
+  [
+   "UALC__buy__cnt__all",
+   248.62560081481934
+  ],
+  [
+   "UOWN__buy__cnt__h7d",
+   242.04546070098877
+  ]
+ ],
+ "placebo": false,
+ "stability": null,
+ "search_seconds": 617.0054128170013,
+ "grammar_build_seconds": 35.69783306121826
+}

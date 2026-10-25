@@ -1,0 +1,321 @@
+{
+ "grid": "decay",
+ "k": 64,
+ "names": [
+  "I__view__cnt__h1d",
+  "I__view__cnt__h3d",
+  "SEX_I__view__cnt__h3d",
+  "UG__view__cnt__h7d",
+  "SEX_I__view__cnt__h1d",
+  "UACT__view__cnt__h7d",
+  "UACT__view__cnt__h1d",
+  "UACT__view__mpr__all",
+  "SEX_I__view__cnt__h14d",
+  "SEX_I__done__cnt__h7d",
+  "D__view__cnt__h1d",
+  "UG__view__cnt__h180d",
+  "SEX_I__view__cnt__h7d",
+  "UG__view__cnt__h30d",
+  "UG__done__cnt__h14d",
+  "AGE_I__view__cnt__h1d",
+  "UG__view__cnt__h14d",
+  "ACT__drop__age__all",
+  "UAR__full__rate__h30d",
+  "UG__done__cnt__h30d",
+  "UAR__drop__age__all",
+  "UC__done__cnt__h90d",
+  "UCT__done__age__all",
+  "U__drop__rate__h30d",
+  "UC__view__mpr__h90d",
+  "UDEC__view__age__all",
+  "INC_I__full__age__all",
+  "KIDS_I__drop__cnt__h3d",
+  "UC__done__rec__all",
+  "D__done__age__all",
+  "UACT__view__age__all",
+  "I__done__cnt__h1d",
+  "ACT__drop__cnt__h1d",
+  "AGE_I__drop__cnt__h3d",
+  "AGE_I__done__rec__all",
+  "UC__done__age__all",
+  "UC__full__age__all",
+  "UC__drop__age__all",
+  "I__full__rate__h30d",
+  "U__view__cnt__h180d",
+  "ACT__full__age__all",
+  "UC__view__age__all",
+  "UACT__view__cnt__all",
+  "D__drop__cnt__h1d",
+  "UG__view__rec__all",
+  "UAR__view__age__all",
+  "UDEC__drop__rate__h30d",
+  "AGE_I__view__cnt__h3d",
+  "U__view__cnt__h1d",
+  "AGE_I__full__age__all",
+  "UAR__view__rec__all",
+  "U__done__cnt__h14d",
+  "UCT__view__mpr__h1d",
+  "AGE_I__done__rate__h1d",
+  "UACT__done__age__all",
+  "UG__done__cnt__h7d",
+  "UCT__drop__rate__h3d",
+  "ACT__full__rate__h30d",
+  "AGE_I__drop__cnt__h30d",
+  "UAR__drop__rec__all",
+  "UAR__view__mpr__h1d",
+  "UCT__view__cnt__h30d",
+  "UG__view__age__all",
+  "I__drop__cnt__h3d"
+ ],
+ "curve": {
+  "8": 0.7656408528486257,
+  "16": 0.7579008654340457,
+  "24": 0.7606138826213543,
+  "32": 0.7643736945062746,
+  "48": 0.7616844908523924,
+  "64": 0.766807644392618,
+  "96": 0.7635158282228623,
+  "128": 0.7614007066765739
+ },
+ "gauc_base_only": 0.7408335259066932,
+ "gauc_all_candidates": 0.7622036839442333,
+ "weights": {
+  "h1d": 12,
+  "h3d": 7,
+  "h7d": 5,
+  "all": 23,
+  "h14d": 4,
+  "h180d": 2,
+  "h30d": 9,
+  "h90d": 2
+ },
+ "keys": {
+  "I": 5,
+  "SEX_I": 5,
+  "UG": 9,
+  "UACT": 6,
+  "D": 3,
+  "AGE_I": 7,
+  "ACT": 4,
+  "UAR": 6,
+  "UC": 7,
+  "UCT": 4,
+  "U": 4,
+  "UDEC": 2,
+  "INC_I": 1,
+  "KIDS_I": 1
+ },
+ "aggs": {
+  "cnt": 32,
+  "mpr": 4,
+  "age": 16,
+  "rate": 7,
+  "rec": 5
+ },
+ "importance_top50": [
+  [
+   "I__view__cnt__h1d",
+   4060.036720275879
+  ],
+  [
+   "I__view__cnt__h3d",
+   2338.618734359741
+  ],
+  [
+   "SEX_I__view__cnt__h3d",
+   2179.2870178222656
+  ],
+  [
+   "cand_pop_rank",
+   1718.6182403564453
+  ],
+  [
+   "cand_ials_score",
+   1314.8198385238647
+  ],
+  [
+   "cand_ials_rank",
+   836.4195709228516
+  ],
+  [
+   "UG__view__cnt__h7d",
+   780.7401208877563
+  ],
+  [
+   "SEX_I__view__cnt__h1d",
+   703.217698097229
+  ],
+  [
+   "UACT__view__cnt__h7d",
+   624.4099140167236
+  ],
+  [
+   "UACT__view__cnt__h1d",
+   386.3680114746094
+  ],
+  [
+   "UACT__view__mpr__all",
+   378.93568992614746
+  ],
+  [
+   "SEX_I__view__cnt__h14d",
+   376.3987922668457
+  ],
+  [
+   "SEX_I__done__cnt__h7d",
+   326.1333055496216
+  ],
+  [
+   "D__view__cnt__h1d",
+   320.5427083969116
+  ],
+  [
+   "UG__view__cnt__h180d",
+   319.5921058654785
+  ],
+  [
+   "SEX_I__view__cnt__h7d",
+   294.0909996032715
+  ],
+  [
+   "UG__view__cnt__h30d",
+   291.90770053863525
+  ],
+  [
+   "UG__done__cnt__h14d",
+   279.6695098876953
+  ],
+  [
+   "AGE_I__view__cnt__h1d",
+   248.37700080871582
+  ],
+  [
+   "UG__view__cnt__h14d",
+   239.64859771728516
+  ],
+  [
+   "ACT__drop__age__all",
+   237.4627866744995
+  ],
+  [
+   "UAR__full__rate__h30d",
+   223.96705150604248
+  ],
+  [
+   "UG__done__cnt__h30d",
+   217.91189861297607
+  ],
+  [
+   "UAR__drop__age__all",
+   217.3962984085083
+  ],
+  [
+   "UC__done__cnt__h90d",
+   215.39269351959229
+  ],
+  [
+   "UCT__done__age__all",
+   214.7014980316162
+  ],
+  [
+   "U__drop__rate__h30d",
+   213.2431001663208
+  ],
+  [
+   "UC__view__mpr__h90d",
+   208.86350536346436
+  ],
+  [
+   "UDEC__view__age__all",
+   208.1467399597168
+  ],
+  [
+   "INC_I__full__age__all",
+   200.65960311889648
+  ],
+  [
+   "KIDS_I__drop__cnt__h3d",
+   191.9745273590088
+  ],
+  [
+   "UC__done__rec__all",
+   191.94760417938232
+  ],
+  [
+   "D__done__age__all",
+   185.50735187530518
+  ],
+  [
+   "UACT__view__age__all",
+   182.6355276107788
+  ],
+  [
+   "I__done__cnt__h1d",
+   181.34709930419922
+  ],
+  [
+   "ACT__drop__cnt__h1d",
+   175.6849241256714
+  ],
+  [
+   "AGE_I__drop__cnt__h3d",
+   174.7232780456543
+  ],
+  [
+   "AGE_I__done__rec__all",
+   173.52589988708496
+  ],
+  [
+   "UC__done__age__all",
+   172.06232070922852
+  ],
+  [
+   "UC__full__age__all",
+   167.22688961029053
+  ],
+  [
+   "UC__drop__age__all",
+   164.8691577911377
+  ],
+  [
+   "I__full__rate__h30d",
+   163.0780029296875
+  ],
+  [
+   "U__view__cnt__h180d",
+   161.72089099884033
+  ],
+  [
+   "ACT__full__age__all",
+   159.72729969024658
+  ],
+  [
+   "UC__view__age__all",
+   157.09170150756836
+  ],
+  [
+   "UACT__view__cnt__all",
+   156.74240112304688
+  ],
+  [
+   "D__drop__cnt__h1d",
+   153.85468578338623
+  ],
+  [
+   "UG__view__rec__all",
+   153.0910415649414
+  ],
+  [
+   "UAR__view__age__all",
+   150.57309913635254
+  ],
+  [
+   "UDEC__drop__rate__h30d",
+   150.52599906921387
+  ]
+ ],
+ "placebo": false,
+ "stability": null,
+ "search_seconds": 1024.771645784378,
+ "grammar_build_seconds": 33.93665814399719
+}

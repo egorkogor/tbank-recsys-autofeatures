@@ -1,0 +1,102 @@
+{
+ "commit": "db1a3920ea3d897566541b9966bf995bec45ce9f",
+ "common": {
+  "rows": "3d3eb718993043ca84e86c47d93a242de94653c42c4386b961fc8e5ab6bfaffb",
+  "objective": "d17e1fea2941588226d073de5c6da7acbea5c9923b60dfad36379f2afa3bf7c2"
+ },
+ "branches_files": {
+  "trivial_ials_score": {
+   "artifacts\\kion\\features\\b0.parquet": "a1fa1c3ad27d24b152377c08903d1478bc394c4f3b83127a3cfd467ad6a40321"
+  },
+  "trivial_pop_rank": {
+   "artifacts\\kion\\features\\b0.parquet": "a1fa1c3ad27d24b152377c08903d1478bc394c4f3b83127a3cfd467ad6a40321"
+  },
+  "base_only": {
+   "artifacts\\kion\\runs\\base_only\\params.json": "1e5383553ca8b03983ba6febc8da273ba7cc7012b6733539100199a0e5b4eeb5",
+   "artifacts\\kion\\features\\b0.parquet": "a1fa1c3ad27d24b152377c08903d1478bc394c4f3b83127a3cfd467ad6a40321"
+  },
+  "b0": {
+   "artifacts\\kion\\runs\\b0\\params.json": "5ea54fdcacdc3e4c7068d251c77e6cbfe59c072924df0309d137fa4e11c66333",
+   "artifacts\\kion\\features\\b0.parquet": "a1fa1c3ad27d24b152377c08903d1478bc394c4f3b83127a3cfd467ad6a40321"
+  },
+  "r1_decay": {
+   "artifacts\\kion\\runs\\r1_decay\\params.json": "48cffdeb7e22d6b3c7c6c132f6f55d8bb1ea75d168770a6196204461d34d9901",
+   "artifacts\\kion\\features\\b0.parquet": "a1fa1c3ad27d24b152377c08903d1478bc394c4f3b83127a3cfd467ad6a40321",
+   "artifacts\\kion\\features\\r1_decay.parquet": "5e2c1719058c6461c11d6815ddc1f03a09913adb3fbc30b56657c2e66ef9cbec"
+  },
+  "r1_window": {
+   "artifacts\\kion\\runs\\r1_window\\params.json": "9a17f95b3aa9700bf7f1cfdd52fae23ba362056c3dadd4d7ab0f1b6bb14a8c28",
+   "artifacts\\kion\\features\\b0.parquet": "a1fa1c3ad27d24b152377c08903d1478bc394c4f3b83127a3cfd467ad6a40321",
+   "artifacts\\kion\\features\\r1_window.parquet": "b86b2dec6dacd8733931c904f23ae6ebd13f3ee9d57b0b29b283e1374419f91a"
+  },
+  "r1_decay_k33": {
+   "artifacts\\kion\\runs\\r1_decay_k33\\params.json": "4a0600632db972871cebbdcc2bdc2cb7a3f3342c7556bf3061c29b4a645c285e",
+   "artifacts\\kion\\features\\b0.parquet": "a1fa1c3ad27d24b152377c08903d1478bc394c4f3b83127a3cfd467ad6a40321",
+   "artifacts\\kion\\features\\r1_decay.parquet": "5e2c1719058c6461c11d6815ddc1f03a09913adb3fbc30b56657c2e66ef9cbec"
+  },
+  "r1_window_k33": {
+   "artifacts\\kion\\runs\\r1_window_k33\\params.json": "28be26093280d13d266b4dcddc7f218eab4609cffe19af8918e7ea4c27ff6e1d",
+   "artifacts\\kion\\features\\b0.parquet": "a1fa1c3ad27d24b152377c08903d1478bc394c4f3b83127a3cfd467ad6a40321",
+   "artifacts\\kion\\features\\r1_window_k33.parquet": "fa866ee959fdd2d0bff97d1b08e898d1e3dd95bf6c6a055f9e46f3381b121a64"
+  }
+ },
+ "time": "2026-10-24 21:37:15",
+ "branches": [
+  "trivial_ials_score",
+  "trivial_pop_rank",
+  "base_only",
+  "b0",
+  "r1_decay",
+  "r1_window",
+  "r1_decay_k33",
+  "r1_window_k33"
+ ],
+ "margins": {
+  "gauc": 0.002,
+  "ndcg10": 0.003
+ },
+ "stages": {
+  "val": {
+   "train": [
+    128,
+    135,
+    142
+   ],
+   "eval": [
+    149
+   ],
+   "first_stage_before": 128
+  },
+  "oot": {
+   "train": [
+    135,
+    142,
+    149
+   ],
+   "eval": [
+    156
+   ],
+   "first_stage_before": 135
+  }
+ },
+ "hypotheses": {
+  "H1 R1 (decay search) is not worse than B0": [
+   "r1_decay",
+   "b0"
+  ],
+  "H4 decay search is not worse than window search at an equal count": [
+   "r1_decay_k33",
+   "r1_window_k33"
+  ],
+  "H5 the search beats B0 at an equal count (window grid)": [
+   "r1_window_k33",
+   "b0"
+  ]
+ },
+ "manifest_role": "published_equivalent",
+ "publication_only": true,
+ "historical_commit": "e648d0af6f213988ced1e1c4b569bb4e74d220fc",
+ "historical_manifest_git_sha256": "160a3a6352f39a22beec84a297d8eac0eb2bb2949bc939560231968c8bed366f",
+ "time_role": "self-reported historical run time; not a publication timestamp",
+ "execution_authorization": "none; publication equivalents cannot authorize OOT"
+}

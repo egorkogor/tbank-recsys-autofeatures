@@ -1,0 +1,212 @@
+{
+ "commit": "db1a3920ea3d897566541b9966bf995bec45ce9f",
+ "common": {
+  "rows": "5e10f226dd1bf7d3edd3d30875d5ec81d9893ae4c63d8b8ca57ce0beede3863b",
+  "objective": "a8b860df665a1aa0ad51bc682c784af460609a1ccddcf1fb9890ac5382d7354f"
+ },
+ "branches_files": {
+  "trivial_item_lp_rate": {
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605"
+  },
+  "trivial_seen_before": {
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605"
+  },
+  "trivial_user_artist_lp": {
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605"
+  },
+  "b0": {
+   "artifacts\\runs\\b0\\params.json": "4163f24a7dbf98b3258981e2db9e006529aba6e2f9dac273eae7e116f6953e75",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605"
+  },
+  "r1_decay": {
+   "artifacts\\runs\\r1_decay\\params.json": "6471cc5292fecac89664c23b2ec03d7a11f2315cbb4f6281ab3cae96d2a2a62c",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\r1_decay.parquet": "50545dcbb9130298a369a0b69940fdacc8be318f9962930e94b87e99650a6413"
+  },
+  "r1_window": {
+   "artifacts\\runs\\r1_window\\params.json": "d109e6568c953c0bf8bfef208ca5b99cc397759b8fb68183628ef8b76e9cb44f",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\r1_window.parquet": "1b44b4c06b7f191c925373039123862add49ea19843caf82e6881adfff5b1107"
+  },
+  "r1_decay_k56": {
+   "artifacts\\runs\\r1_decay_k56\\params.json": "a4b36e05e5e7b6cc1fbb2cec1002b63728bea2a28613edeb9a3b1705baf16d9f",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\r1_decay.parquet": "50545dcbb9130298a369a0b69940fdacc8be318f9962930e94b87e99650a6413"
+  },
+  "r1_window_k56": {
+   "artifacts\\runs\\r1_window_k56\\params.json": "4d88fc627397fcf215c51b8dc09bde2064a05e9f4ee180e78cc4475147723cc3",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\r1_window.parquet": "1b44b4c06b7f191c925373039123862add49ea19843caf82e6881adfff5b1107"
+  },
+  "r1_r5": {
+   "artifacts\\runs\\r1_r5\\params.json": "7fb1b576594f5426400e4c18f20668d92832f91bd84dcbe725687eb7b5baedee",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\r1_decay.parquet": "50545dcbb9130298a369a0b69940fdacc8be318f9962930e94b87e99650a6413",
+   "artifacts\\features\\r5.parquet": "4dbca629fbb7998063fadeed180cf4f26e4c66688baa9100c4f005839d99cfb4"
+  },
+  "r1_decay_stable": {
+   "artifacts\\runs\\r1_decay_stable\\params.json": "a7c90c53fb9596f5530becee3f7b955b3cf7b4b9bc9de214adf4ddd25527aa17",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\r1_decay_stable.parquet": "b9e848882afb391e42f4348b29293490c2bc99bd89e3d57161afd89534a8cc5e"
+  },
+  "b0_ials": {
+   "artifacts\\runs\\b0_ials\\params.json": "c40394b952e3697553cdbff106eedf27b713c1ca3499dee6093e316c4d8fb806",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605"
+  },
+  "b0_audio": {
+   "artifacts\\runs\\b0_audio\\params.json": "406a9bd12e008d9fc63502f48711ac593d3ab21a8de1cede296254743b2a1e1a",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\audio.parquet": "a4e912217caaaf2f822809ef203e932c315460e1909f751c23c8e433ab3e1fd2"
+  },
+  "b0_perseus": {
+   "artifacts\\runs\\b0_perseus\\params.json": "3256c37d6a7ece2b3db4fc22c2e255062e97bfb7c9f4c8f873974c8c725a45bd",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\perseus_oot.parquet": "c44065afaf659f093c3daba6af76622b874811ac0f0d765e629e705cb3bb8865"
+  },
+  "b0_trunc256": {
+   "artifacts\\runs\\b0_trunc256\\params.json": "8343e1911a25f83c41ef5c738630727f4d98d6c5031c33cbf630d8a21def8354",
+   "artifacts\\features\\b0_trunc256.parquet": "dc58a373fcb61c65f9e80a37124cca05356135de716449031605f1293e283a50"
+  },
+  "full": {
+   "artifacts\\runs\\full\\params.json": "bbced5fb6b7999183e73529737a11c176f76fabdce34d9e9a451e37b44a9779d",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\r1_decay.parquet": "50545dcbb9130298a369a0b69940fdacc8be318f9962930e94b87e99650a6413",
+   "artifacts\\features\\audio.parquet": "a4e912217caaaf2f822809ef203e932c315460e1909f751c23c8e433ab3e1fd2",
+   "artifacts\\features\\perseus_oot.parquet": "c44065afaf659f093c3daba6af76622b874811ac0f0d765e629e705cb3bb8865"
+  },
+  "r3_perseus": {},
+  "b0_ctx": {
+   "artifacts\\runs\\b0_ctx\\params.json": "69bbb3dbd8e59bca8deb56394dca8175a9baf333ea56a03f23391dfc557acab8",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\ctx_b0.parquet": "178d186eea61d5372a09fd2f506358d8517976f9f843e2dad9efc70ab8b783cd"
+  },
+  "r1_ctx": {
+   "artifacts\\runs\\r1_ctx\\params.json": "816c30e18619a71156f7e08862ccea9669cb125ca7a26fd01c7a09e8177ae83f",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\r1_decay.parquet": "50545dcbb9130298a369a0b69940fdacc8be318f9962930e94b87e99650a6413",
+   "artifacts\\features\\ctx_r1.parquet": "53c503cd6d8ba137353ff3abe2dbef4257ee1e6e01283d0c962a69a382b6408d"
+  },
+  "b0_ctx_mood": {
+   "artifacts\\runs\\b0_ctx_mood\\params.json": "c9955dbaa8f1ea90bfce7eddb85cb422b006b9e9c66fad7694a7f65946700f92",
+   "artifacts\\features\\b0.parquet": "9b4289479e80b73be0266daa48813185489356ee58af596780592c97631a5605",
+   "artifacts\\features\\ctx_b0.parquet": "178d186eea61d5372a09fd2f506358d8517976f9f843e2dad9efc70ab8b783cd",
+   "artifacts\\features\\mood.parquet": "997eaac3bc85abb9b12cdf0e7b567463bafba4f9bf9f853126ac344c5f7034e5"
+  }
+ },
+ "time": "2026-10-24 21:37:10",
+ "branches": [
+  "trivial_item_lp_rate",
+  "trivial_seen_before",
+  "trivial_user_artist_lp",
+  "b0",
+  "r1_decay",
+  "r1_window",
+  "r1_decay_k56",
+  "r1_window_k56",
+  "r1_r5",
+  "r1_decay_stable",
+  "b0_ials",
+  "b0_audio",
+  "b0_perseus",
+  "b0_trunc256",
+  "full",
+  "r3_perseus",
+  "b0_ctx",
+  "r1_ctx",
+  "b0_ctx_mood"
+ ],
+ "margins": {
+  "gauc": 0.002,
+  "ndcg10": 0.003
+ },
+ "stages": {
+  "val": {
+   "train": [
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286
+   ],
+   "eval": [
+    287,
+    288,
+    289,
+    290,
+    291,
+    292,
+    293
+   ],
+   "first_stage_before": 273
+  },
+  "oot": {
+   "train": [
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    289,
+    290,
+    291,
+    292,
+    293
+   ],
+   "eval": [
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300
+   ],
+   "first_stage_before": 280
+  }
+ },
+ "hypotheses": {
+  "H1 R1 (decay search) is not worse than B0": [
+   "r1_decay",
+   "b0"
+  ],
+  "H2 Perseus alone is worse than B0": [
+   "r3_perseus",
+   "b0"
+  ],
+  "H3 B0 + Perseus score is better than B0": [
+   "b0_perseus",
+   "b0"
+  ],
+  "H4 decay search is not worse than window search at an equal count": [
+   "r1_decay_k56",
+   "r1_window_k56"
+  ],
+  "H5 the search beats B0 at an equal count (window grid)": [
+   "r1_window_k56",
+   "b0"
+  ],
+  "H7 request-time context: searched beats hand-made": [
+   "r1_ctx",
+   "b0_ctx"
+  ]
+ },
+ "manifest_role": "published_equivalent",
+ "publication_only": true,
+ "historical_commit": "e648d0af6f213988ced1e1c4b569bb4e74d220fc",
+ "historical_manifest_git_sha256": "7bd227bc01ce06d8acfb3850910afbce94e64fa57f85b3eb7520ce752bccfedd",
+ "time_role": "self-reported historical run time; not a publication timestamp",
+ "execution_authorization": "none; publication equivalents cannot authorize OOT"
+}

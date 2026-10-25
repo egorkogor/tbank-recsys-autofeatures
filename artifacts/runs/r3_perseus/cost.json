@@ -1,0 +1,611 @@
+{
+  "global_prepare": {
+    "success": true,
+    "seconds": 7.017760100017767,
+    "queries": 124565,
+    "history_events": 12653792,
+    "max_history_day": 299,
+    "rows_y_read": false,
+    "cutoff_assertions_pass": true,
+    "tie_break": [
+      "t",
+      "original_event_row_index"
+    ],
+    "no_history_queries": 366
+  },
+  "models": {
+    "r3_small": {
+      "model": "r3_small",
+      "train_days": [
+        273,
+        286
+      ],
+      "sequence": 256,
+      "dim": 128,
+      "prepare_seconds": 5.946863399993163,
+      "train_rows": 1398886,
+      "train_pairs": 1314909,
+      "train_samples": 41780,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 153.2005150000041,
+          "val_seconds": 16.39423600002192,
+          "val_A_gauc": 0.5445405857699438,
+          "val_A_missing": 0
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 139.4989668999915,
+          "val_seconds": 14.352433799998835,
+          "val_A_gauc": 0.5485737196980722,
+          "val_A_missing": 0
+        },
+        {
+          "epoch": 3,
+          "train_seconds": 144.9812876000069,
+          "val_seconds": 15.084959400002845,
+          "val_A_gauc": 0.5470130004167414,
+          "val_A_missing": 0
+        }
+      ],
+      "status": "complete",
+      "best_gauc": 0.5485737196980722,
+      "best_epoch": 2,
+      "fit_save_seconds": 498.7249726000009,
+      "peak_allocated_bytes": 1055593472,
+      "peak_reserved_bytes": 1174405120,
+      "checkpoint_bytes": 209381205,
+      "completed_epochs": 3,
+      "chosen_epochs": 2,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    },
+    "r3_large": {
+      "model": "r3_large",
+      "train_days": [
+        273,
+        286
+      ],
+      "sequence": 512,
+      "dim": 256,
+      "prepare_seconds": 6.38606359998812,
+      "train_rows": 1398886,
+      "train_pairs": 1314909,
+      "train_samples": 41780,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 434.5222572000057,
+          "val_seconds": 26.170386999991024,
+          "val_A_gauc": 0.5467266709172967,
+          "val_A_missing": 0
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 465.51610580002307,
+          "val_seconds": 45.66477460000897,
+          "val_A_gauc": 0.5444694552293532,
+          "val_A_missing": 0
+        }
+      ],
+      "status": "complete",
+      "best_gauc": 0.5467266709172967,
+      "best_epoch": 1,
+      "fit_save_seconds": 990.9167200000084,
+      "peak_allocated_bytes": 2153143808,
+      "peak_reserved_bytes": 2344615936,
+      "checkpoint_bytes": 426966081,
+      "completed_epochs": 2,
+      "chosen_epochs": 1,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    },
+    "r4_val": {
+      "model": "r4_val",
+      "train_days": [
+        259,
+        272
+      ],
+      "sequence": 256,
+      "dim": 128,
+      "prepare_seconds": 5.8698676000058185,
+      "train_rows": 1347528,
+      "train_pairs": 1263966,
+      "train_samples": 40078,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 234.23073710000608
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 270.2244232999801
+        }
+      ],
+      "status": "complete",
+      "fit_save_seconds": 515.6741457000026,
+      "peak_allocated_bytes": 1052820992,
+      "peak_reserved_bytes": 1170210816,
+      "checkpoint_bytes": 208744395,
+      "completed_epochs": 2,
+      "chosen_epochs": 2,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    },
+    "r4_oot": {
+      "model": "r4_oot",
+      "train_days": [
+        266,
+        279
+      ],
+      "sequence": 256,
+      "dim": 128,
+      "prepare_seconds": 9.624289500003215,
+      "train_rows": 1372419,
+      "train_pairs": 1290427,
+      "train_samples": 40861,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 275.9745813999907
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 185.98553689999972
+        }
+      ],
+      "status": "complete",
+      "fit_save_seconds": 481.22473340001306,
+      "peak_allocated_bytes": 1054293504,
+      "peak_reserved_bytes": 1174405120,
+      "checkpoint_bytes": 209117891,
+      "completed_epochs": 2,
+      "chosen_epochs": 2,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    },
+    "r3_oot": {
+      "model": "r3_oot",
+      "train_days": [
+        280,
+        293
+      ],
+      "sequence": 256,
+      "dim": 128,
+      "prepare_seconds": 6.36203800002113,
+      "train_rows": 1438184,
+      "train_pairs": 1356041,
+      "train_samples": 42471,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 160.54124430002412
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 150.19030430002022
+        }
+      ],
+      "status": "complete",
+      "fit_save_seconds": 319.77868019999005,
+      "peak_allocated_bytes": 1063022080,
+      "peak_reserved_bytes": 1203765248,
+      "checkpoint_bytes": 210010332,
+      "completed_epochs": 2,
+      "chosen_epochs": 2,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    },
+    "r3_authors": {
+      "model": "r3_authors",
+      "train_days": [
+        273,
+        286
+      ],
+      "sequence": 512,
+      "dim": 256,
+      "layers": 4,
+      "batch": 8,
+      "accumulation": 8,
+      "cache": "cache",
+      "prepare_seconds": 6.905539700004738,
+      "train_rows": 1398886,
+      "train_pairs": 1314909,
+      "train_samples": 41780,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 340.5518957999884,
+          "val_seconds": 35.365866200008895,
+          "val_A_gauc": 0.5383821195946699,
+          "val_A_missing": 0
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 361.7643670999969,
+          "val_seconds": 36.205690700007835,
+          "val_A_gauc": 0.5468503044558999,
+          "val_A_missing": 0
+        },
+        {
+          "epoch": 3,
+          "train_seconds": 986.2090101999929,
+          "val_seconds": 80.64697780000279,
+          "val_A_gauc": 0.5459169807451724,
+          "val_A_missing": 0
+        }
+      ],
+      "status": "complete",
+      "typed_history": false,
+      "best_gauc": 0.5468503044558999,
+      "best_epoch": 2,
+      "fit_save_seconds": 1864.923982600012,
+      "peak_allocated_bytes": 2418802176,
+      "peak_reserved_bytes": 2858418176,
+      "checkpoint_bytes": 433258969,
+      "completed_epochs": 3,
+      "chosen_epochs": 2,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    },
+    "r3_typed": {
+      "model": "r3_typed",
+      "train_days": [
+        273,
+        286
+      ],
+      "sequence": 256,
+      "dim": 128,
+      "prepare_seconds": 2.7811987999884877,
+      "train_rows": 1398886,
+      "train_pairs": 1312798,
+      "train_samples": 41681,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 150.46202200002153
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 153.2885188999935
+        }
+      ],
+      "status": "complete",
+      "typed_history": true,
+      "fit_save_seconds": 312.4730759000231,
+      "peak_allocated_bytes": 1051603968,
+      "peak_reserved_bytes": 1153433600,
+      "checkpoint_bytes": 208069625,
+      "completed_epochs": 2,
+      "chosen_epochs": 2,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    }
+  },
+  "inference": {
+    "r3_val": {
+      "kind": "r3_val",
+      "model": "r3_small",
+      "days": [
+        287,
+        293
+      ],
+      "rows": 725488,
+      "missing": 0,
+      "missing_fraction": 0.0,
+      "outside_train_item_dictionary_fraction": 0.0801460534150806,
+      "item_encoder_unk_row_fraction": 0.06330911055730763,
+      "inference_seconds": 37.56653479998931,
+      "inference_seconds_per_1000_rows": 0.051781056061560374,
+      "path": "D:\\PdM_Projects\\tbank-recsys-autofeatures\\artifacts\\runs\\r3_perseus\\pred_val.parquet",
+      "metrics_computed": false,
+      "peak_allocated_bytes": 251556352,
+      "peak_reserved_bytes": 270532608,
+      "native_head_parity_max_error": 0.0019530653953552246
+    },
+    "r4_val": {
+      "kind": "r4_val",
+      "model": "r4_val",
+      "days": [
+        273,
+        293
+      ],
+      "rows": 2124374,
+      "missing": 5864,
+      "missing_fraction": 0.00276034257621304,
+      "outside_train_item_dictionary_fraction": 0.09801381489323444,
+      "item_encoder_unk_row_fraction": 0.07815761254844956,
+      "inference_seconds": 340.10182129999157,
+      "inference_seconds_per_1000_rows": 0.16009507803239523,
+      "path": "D:\\PdM_Projects\\tbank-recsys-autofeatures\\artifacts\\features\\perseus_val.parquet",
+      "metrics_computed": false,
+      "peak_allocated_bytes": 255607296,
+      "peak_reserved_bytes": 283115520,
+      "native_head_parity_max_error": 0.0019243955612182617
+    },
+    "r4_oot": {
+      "kind": "r4_oot",
+      "model": "r4_oot",
+      "days": [
+        280,
+        300
+      ],
+      "rows": 2167133,
+      "missing": 3375,
+      "missing_fraction": 0.0015573571165221516,
+      "outside_train_item_dictionary_fraction": 0.09822470517499388,
+      "item_encoder_unk_row_fraction": 0.07938368341952247,
+      "inference_seconds": 97.32602909998968,
+      "inference_seconds_per_1000_rows": 0.04491003971606251,
+      "path": "D:\\PdM_Projects\\tbank-recsys-autofeatures\\artifacts\\features\\perseus_oot.parquet",
+      "metrics_computed": false,
+      "freeze_gate_present_at_start": null,
+      "peak_allocated_bytes": 259750912,
+      "peak_reserved_bytes": 285212672,
+      "native_head_parity_max_error": 0.0019428133964538574
+    }
+  },
+  "selection": {
+    "model": "r3_small",
+    "sequence": 256,
+    "dim": 128,
+    "chosen_epochs": 2,
+    "best_gauc": 0.5485737196980722,
+    "selection_days": [
+      287,
+      293
+    ],
+    "selection_half": "A",
+    "frozen_at": "2026-10-24 08:43:25",
+    "candidates": [
+      {
+        "model": "r3_small",
+        "sequence": 256,
+        "dim": 128,
+        "chosen_epochs": 2,
+        "best_gauc": 0.5485737196980722
+      },
+      {
+        "model": "r3_large",
+        "sequence": 512,
+        "dim": 256,
+        "chosen_epochs": 1,
+        "best_gauc": 0.5467266709172967
+      },
+      {
+        "model": "r3_authors",
+        "sequence": 512,
+        "dim": 256,
+        "layers": 4,
+        "chosen_epochs": 2,
+        "best_gauc": 0.5468503044558999
+      }
+    ],
+    "selected_config_sha256": "5e1c9b88d92a0df85a270a3f31601ffe59c1c6bf43d2e097912df40e9152b377",
+    "layers": 2,
+    "batch": 16,
+    "accumulation": 1
+  },
+  "failed_attempts": [
+    {
+      "model": "r3_small",
+      "reason": "Canonical summary requires integer validation y; float y caused NDCG index error. Fixed input dtype without editing metrics.py.",
+      "completed_train_epoch_seconds": 184.75898359998246,
+      "data_prepare_seconds": 6.928307199996198,
+      "log": "logs/codex/perseus_stage2_r3_small.log",
+      "rerun": "logs/codex/perseus_stage2_r3_small_retry.log"
+    }
+  ],
+  "h6": {
+    "model": {
+      "model": "r3_typed",
+      "train_days": [
+        273,
+        286
+      ],
+      "sequence": 256,
+      "dim": 128,
+      "prepare_seconds": 2.7811987999884877,
+      "train_rows": 1398886,
+      "train_pairs": 1312798,
+      "train_samples": 41681,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 150.46202200002153
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 153.2885188999935
+        }
+      ],
+      "status": "complete",
+      "typed_history": true,
+      "fit_save_seconds": 312.4730759000231,
+      "peak_allocated_bytes": 1051603968,
+      "peak_reserved_bytes": 1153433600,
+      "checkpoint_bytes": 208069625,
+      "completed_epochs": 2,
+      "chosen_epochs": 2,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    },
+    "inference": {
+      "kind": "r3_val",
+      "model": "r3_typed",
+      "days": [
+        287,
+        293
+      ],
+      "rows": 725488,
+      "missing": 2026,
+      "missing_fraction": 0.002792603047879496,
+      "outside_train_item_dictionary_fraction": 0.08015432371038529,
+      "item_encoder_unk_row_fraction": 0.06349519220166289,
+      "inference_seconds": 38.441743800009135,
+      "inference_seconds_per_1000_rows": 0.052987428875472975,
+      "path": "D:\\PdM_Projects\\tbank-recsys-autofeatures\\artifacts\\runs\\r3_perseus_typed\\pred_val.parquet",
+      "metrics_computed": false,
+      "freeze_gate_present_at_start": null,
+      "peak_allocated_bytes": 251486720,
+      "peak_reserved_bytes": 270532608,
+      "native_head_parity_max_error": 0.0019413232803344727
+    },
+    "val_A": {
+      "gauc": 0.5501924886224331,
+      "ndcg10": 0.7323133187565642,
+      "roc_auc": 0.7942308847924093,
+      "groups": 7791,
+      "rows": 361619,
+      "logloss": 0.4951154589653015,
+      "selected_epoch_val_A_gauc": 0.5485737196980722,
+      "delivered_minus_selection_gauc": 0.0016187689243608583
+    },
+    "typed_history": {
+      "success": true,
+      "seconds": 15.347021900000982,
+      "sequence": 256,
+      "quotas": {
+        "0": 176,
+        "1": 64,
+        "2": 16
+      },
+      "horizons_days": {
+        "0": 30,
+        "1": 365,
+        "2": 90
+      },
+      "queries": 63232,
+      "no_history_queries": 374,
+      "strict_cutoff_assertions": true,
+      "labels_read": false
+    },
+    "main_selection_changed": false
+  },
+  "stage3": {
+    "status": "авторы обучены; выбор и обновление артефактов",
+    "authors": {
+      "model": "r3_authors",
+      "train_days": [
+        273,
+        286
+      ],
+      "sequence": 512,
+      "dim": 256,
+      "layers": 4,
+      "batch": 8,
+      "accumulation": 8,
+      "cache": "cache",
+      "prepare_seconds": 6.905539700004738,
+      "train_rows": 1398886,
+      "train_pairs": 1314909,
+      "train_samples": 41780,
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_seconds": 340.5518957999884,
+          "val_seconds": 35.365866200008895,
+          "val_A_gauc": 0.5383821195946699,
+          "val_A_missing": 0
+        },
+        {
+          "epoch": 2,
+          "train_seconds": 361.7643670999969,
+          "val_seconds": 36.205690700007835,
+          "val_A_gauc": 0.5468503044558999,
+          "val_A_missing": 0
+        },
+        {
+          "epoch": 3,
+          "train_seconds": 986.2090101999929,
+          "val_seconds": 80.64697780000279,
+          "val_A_gauc": 0.5459169807451724,
+          "val_A_missing": 0
+        }
+      ],
+      "status": "complete",
+      "typed_history": false,
+      "best_gauc": 0.5468503044558999,
+      "best_epoch": 2,
+      "fit_save_seconds": 1864.923982600012,
+      "peak_allocated_bytes": 2418802176,
+      "peak_reserved_bytes": 2858418176,
+      "checkpoint_bytes": 433258969,
+      "completed_epochs": 3,
+      "chosen_epochs": 2,
+      "affinity": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "priority": "16384"
+    },
+    "authors_command": "stage2.py train --model r3_authors --start 273 --end 286 --seq 512 --dim 256 --layers 4 --batch 8 --accumulation 8 --epochs 3 --select",
+    "decision": "Авторы хуже прежнего выбора: 0.54685030 против 0.54857372; основные R3/R4 сохранены."
+  },
+  "long_global_prepare": {
+    "success": true,
+    "seconds": 9.247904999996535,
+    "queries": 199418,
+    "history_events": 17733035,
+    "max_history_day": 299,
+    "rows_y_read": false,
+    "cutoff_assertions_pass": true,
+    "tie_break": [
+      "t",
+      "original_event_row_index"
+    ],
+    "no_history_queries": 714
+  }
+}

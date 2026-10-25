@@ -1,0 +1,10 @@
+{
+  "gauc": 0.5485737196980722,
+  "ndcg10": 0.7318981714786015,
+  "roc_auc": 0.8035109409134318,
+  "groups": 7791,
+  "rows": 361619,
+  "logloss": 0.4898689091205597,
+  "selected_epoch_val_A_gauc": 0.5485737196980722,
+  "delivered_minus_selection_gauc": 0.0
+}

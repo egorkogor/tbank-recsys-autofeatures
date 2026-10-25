@@ -1,0 +1,13 @@
+{
+ "params": {
+  "num_leaves": 38,
+  "min_data_in_leaf": 34,
+  "feature_fraction": 0.949927409583315,
+  "lambda_l2": 0.001295924076517111,
+  "learning_rate": 0.09706991309310473
+ },
+ "rounds": 391,
+ "gauc_val_A": 0.5622005171867823,
+ "trials": 12,
+ "rounds_subsample": 299
+}

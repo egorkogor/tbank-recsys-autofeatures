@@ -1,0 +1,20 @@
+{
+ "objective": "binary",
+ "candidates": {
+  "binary": {
+   "gauc_val_A": 0.8128088852155861,
+   "rounds": 199,
+   "seconds": 48.57503795623779
+  },
+  "lambdarank": {
+   "gauc_val_A": 0.8083042050267216,
+   "rounds": 170,
+   "seconds": 53.680272817611694
+  },
+  "rank_xendcg": {
+   "gauc_val_A": 0.8097478634674035,
+   "rounds": 94,
+   "seconds": 34.32047653198242
+  }
+ }
+}

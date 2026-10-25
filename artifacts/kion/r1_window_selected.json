@@ -1,0 +1,287 @@
+{
+ "grid": "window",
+ "k": 32,
+ "names": [
+  "SEX_I__view__cnt__w3d",
+  "I__view__cnt__w3d",
+  "SEX_I__view__cnt__w7d",
+  "I__done__cnt__w1d",
+  "ACT__view__cnt__w3d",
+  "UG__view__cnt__w30d",
+  "SEX_I__view__cnt__w14d",
+  "I__view__cnt__w1d",
+  "D__view__cnt__w3d",
+  "UACT__done__age__all",
+  "SEX_I__view__cnt__w30d",
+  "UACT__view__rec__all",
+  "UACT__view__mpr__w30d",
+  "UC__view__mpr__w90d",
+  "I__view__cnt__w14d",
+  "U__view__mpr__w30d",
+  "UAR__view__rec__all",
+  "UC__view__mpr__w30d",
+  "SEX_I__full__rate__w14d",
+  "UDEC__view__mpr__w90d",
+  "UCT__done__rec__all",
+  "I__drop__cnt__w30d",
+  "UC__view__mpr__w180d",
+  "UG__view__mpr__w30d",
+  "UG__view__cnt__w180d",
+  "ACT__drop__age__all",
+  "UACT__view__age__all",
+  "U__drop__age__all",
+  "SEX_I__drop__cnt__w7d",
+  "AGE_I__view__mpr__w1d",
+  "UC__done__cnt__w180d",
+  "UCT__view__mpr__w30d"
+ ],
+ "curve": {
+  "8": 0.7536054235005413,
+  "16": 0.758910380736391,
+  "24": 0.7628805485936796,
+  "32": 0.767348026334767,
+  "48": 0.7612109282519122,
+  "64": 0.7662356416861803,
+  "96": 0.759218332019817,
+  "128": 0.7547964812347249
+ },
+ "gauc_base_only": 0.740833525906693,
+ "gauc_all_candidates": 0.7678001501625571,
+ "weights": {
+  "w3d": 4,
+  "w7d": 2,
+  "w1d": 3,
+  "w30d": 8,
+  "w14d": 3,
+  "all": 7,
+  "w90d": 2,
+  "w180d": 3
+ },
+ "keys": {
+  "SEX_I": 6,
+  "I": 5,
+  "ACT": 2,
+  "UG": 3,
+  "D": 1,
+  "UACT": 4,
+  "UC": 4,
+  "U": 2,
+  "UAR": 1,
+  "UDEC": 1,
+  "UCT": 2,
+  "AGE_I": 1
+ },
+ "aggs": {
+  "cnt": 15,
+  "age": 4,
+  "rec": 3,
+  "mpr": 9,
+  "rate": 1
+ },
+ "importance_top50": [
+  [
+   "SEX_I__view__cnt__w3d",
+   2555.29380607605
+  ],
+  [
+   "I__view__cnt__w3d",
+   2426.6359701156616
+  ],
+  [
+   "cand_pop_rank",
+   1778.8547401428223
+  ],
+  [
+   "SEX_I__view__cnt__w7d",
+   1722.4766731262207
+  ],
+  [
+   "cand_ials_score",
+   1143.423376083374
+  ],
+  [
+   "I__done__cnt__w1d",
+   1004.4299926757812
+  ],
+  [
+   "cand_ials_rank",
+   847.589900970459
+  ],
+  [
+   "ACT__view__cnt__w3d",
+   665.0340805053711
+  ],
+  [
+   "UG__view__cnt__w30d",
+   589.5781993865967
+  ],
+  [
+   "SEX_I__view__cnt__w14d",
+   423.7842950820923
+  ],
+  [
+   "I__view__cnt__w1d",
+   406.947998046875
+  ],
+  [
+   "D__view__cnt__w3d",
+   400.7119026184082
+  ],
+  [
+   "UACT__done__age__all",
+   353.82789516448975
+  ],
+  [
+   "SEX_I__view__cnt__w30d",
+   345.257999420166
+  ],
+  [
+   "UACT__view__rec__all",
+   320.4914970397949
+  ],
+  [
+   "UACT__view__mpr__w30d",
+   310.83288860321045
+  ],
+  [
+   "UC__view__mpr__w90d",
+   307.64099884033203
+  ],
+  [
+   "I__view__cnt__w14d",
+   302.158203125
+  ],
+  [
+   "U__view__mpr__w30d",
+   294.51200008392334
+  ],
+  [
+   "UAR__view__rec__all",
+   289.8668031692505
+  ],
+  [
+   "UC__view__mpr__w30d",
+   277.54501247406006
+  ],
+  [
+   "SEX_I__full__rate__w14d",
+   275.83269691467285
+  ],
+  [
+   "UDEC__view__mpr__w90d",
+   272.9521961212158
+  ],
+  [
+   "UCT__done__rec__all",
+   263.40739822387695
+  ],
+  [
+   "I__drop__cnt__w30d",
+   259.7344980239868
+  ],
+  [
+   "UC__view__mpr__w180d",
+   254.839599609375
+  ],
+  [
+   "UG__view__mpr__w30d",
+   253.52199840545654
+  ],
+  [
+   "UG__view__cnt__w180d",
+   246.78110122680664
+  ],
+  [
+   "ACT__drop__age__all",
+   236.14069843292236
+  ],
+  [
+   "UACT__view__age__all",
+   226.61269569396973
+  ],
+  [
+   "U__drop__age__all",
+   224.35550117492676
+  ],
+  [
+   "SEX_I__drop__cnt__w7d",
+   219.4887924194336
+  ],
+  [
+   "AGE_I__view__mpr__w1d",
+   217.04529762268066
+  ],
+  [
+   "UC__done__cnt__w180d",
+   209.81289672851562
+  ],
+  [
+   "UCT__view__mpr__w30d",
+   209.14139938354492
+  ],
+  [
+   "UAR__view__age__all",
+   205.3725986480713
+  ],
+  [
+   "UDEC__view__age__all",
+   197.74129962921143
+  ],
+  [
+   "UCT__view__mpr__w180d",
+   196.6269998550415
+  ],
+  [
+   "UC__done__rec__all",
+   193.76630306243896
+  ],
+  [
+   "UG__done__rate__w180d",
+   191.26189804077148
+  ],
+  [
+   "UC__done__cnt__w90d",
+   188.4960012435913
+  ],
+  [
+   "KIDS_I__drop__cnt__w7d",
+   182.874924659729
+  ],
+  [
+   "UAR__view__mpr__w14d",
+   179.9474000930786
+  ],
+  [
+   "UG__done__age__all",
+   176.59720134735107
+  ],
+  [
+   "SEX_I__view__mpr__w1d",
+   175.8513994216919
+  ],
+  [
+   "UG__view__age__all",
+   173.5506010055542
+  ],
+  [
+   "AGE_G__drop__rate__w180d",
+   170.30129718780518
+  ],
+  [
+   "UG__done__rate__w7d",
+   168.85349941253662
+  ],
+  [
+   "UDEC__view__mpr__w180d",
+   167.74790000915527
+  ],
+  [
+   "UDEC__drop__rec__all",
+   160.29020023345947
+  ]
+ ],
+ "placebo": false,
+ "stability": null,
+ "search_seconds": 1065.1845138072968,
+ "grammar_build_seconds": 38.23035502433777
+}

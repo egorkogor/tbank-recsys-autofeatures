@@ -1,0 +1,106 @@
+{
+ "commit": "db1a3920ea3d897566541b9966bf995bec45ce9f",
+ "common": {
+  "rows": "a4be2c65bc5b862001941c1e417c0903518f631ccc0f8673ade81f762d9bf0d4",
+  "objective": "1bbd68a5efa278707a03933c44cf6c9e36df82b0256e03143eea665552b2681c"
+ },
+ "branches_files": {
+  "trivial_ials_score": {
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484"
+  },
+  "trivial_pop_rank": {
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484"
+  },
+  "trivial_hist_rank": {
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484"
+  },
+  "base_only": {
+   "artifacts\\x5\\runs\\base_only\\params.json": "0a0e4fef731cf472aae7961234c705184b35bdee0be6a037ebcedf0fc3d02d87",
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484"
+  },
+  "b0": {
+   "artifacts\\x5\\runs\\b0\\params.json": "86b6f7a05d3ce6c071169f15fa40d96329e841a049fc2571da2b744b72930c22",
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484"
+  },
+  "r1_decay": {
+   "artifacts\\x5\\runs\\r1_decay\\params.json": "2120c3a4fefd1e5c836541b8e26cb7fcbbaefbcf17dcecfb823ec47f4f3c83fa",
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484",
+   "artifacts\\x5\\features\\r1_decay.parquet": "04c39c2d34f598fec0d7af147b82740dbf460a5ea69fd7d54a1c59d08dc64f8e"
+  },
+  "r1_window": {
+   "artifacts\\x5\\runs\\r1_window\\params.json": "47eaa28f5420f0beadf6d71a29b636ee7a3d69954e4179e09fdda7f57c01a4aa",
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484",
+   "artifacts\\x5\\features\\r1_window.parquet": "b622220234161475d2b7056718baef002914a16472eecbfa935efb26808f486d"
+  },
+  "r1_decay_k25": {
+   "artifacts\\x5\\runs\\r1_decay_k25\\params.json": "48f4ad8e6ca786ec9fef1fff33d4e30c11934f0205bd57efc7510cb99eb348e3",
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484",
+   "artifacts\\x5\\features\\r1_decay.parquet": "04c39c2d34f598fec0d7af147b82740dbf460a5ea69fd7d54a1c59d08dc64f8e"
+  },
+  "r1_window_k25": {
+   "artifacts\\x5\\runs\\r1_window_k25\\params.json": "1de2c2bff6ab62978f0b0197b8c648b55697f8342f18fec6536e7835e7c86b66",
+   "artifacts\\x5\\features\\b0.parquet": "f42b74a8900e59b94cdb542f8101bd592a27659f56def017cedcf9e1b7a22484",
+   "artifacts\\x5\\features\\r1_window_k25.parquet": "4ef542af768f15b375be48c75f0215acd0498a2eef27322212df00d39dd90611"
+  }
+ },
+ "time": "2026-10-24 21:37:20",
+ "branches": [
+  "trivial_ials_score",
+  "trivial_pop_rank",
+  "trivial_hist_rank",
+  "base_only",
+  "b0",
+  "r1_decay",
+  "r1_window",
+  "r1_decay_k25",
+  "r1_window_k25"
+ ],
+ "margins": {
+  "gauc": 0.002,
+  "ndcg10": 0.003
+ },
+ "stages": {
+  "val": {
+   "train": [
+    83,
+    90,
+    97
+   ],
+   "eval": [
+    104
+   ],
+   "first_stage_before": 83
+  },
+  "oot": {
+   "train": [
+    90,
+    97,
+    104
+   ],
+   "eval": [
+    111
+   ],
+   "first_stage_before": 90
+  }
+ },
+ "hypotheses": {
+  "H1 R1 (decay search) is not worse than B0": [
+   "r1_decay",
+   "b0"
+  ],
+  "H4 decay search is not worse than window search at an equal count": [
+   "r1_decay_k25",
+   "r1_window_k25"
+  ],
+  "H5 the search beats B0 at an equal count (window grid)": [
+   "r1_window_k25",
+   "b0"
+  ]
+ },
+ "manifest_role": "published_equivalent",
+ "publication_only": true,
+ "historical_commit": "e648d0af6f213988ced1e1c4b569bb4e74d220fc",
+ "historical_manifest_git_sha256": "2a58cad31819d35a0c407121e06615c3998f6d2044f8234df02162d3c0f53e05",
+ "time_role": "self-reported historical run time; not a publication timestamp",
+ "execution_authorization": "none; publication equivalents cannot authorize OOT"
+}

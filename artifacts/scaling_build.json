@@ -1,0 +1,92 @@
+[
+ {
+  "users": 989,
+  "events": 4910324,
+  "rows": 9897,
+  "set": "B0",
+  "features": 58,
+  "seconds": 1.3967053890228271,
+  "rss_gb_after": 2.2595584,
+  "rss_gb_before": 1.849782272
+ },
+ {
+  "users": 989,
+  "events": 4910324,
+  "rows": 9897,
+  "set": "R1 (96)",
+  "features": 96,
+  "seconds": 2.9590346813201904,
+  "rss_gb_after": 2.385227776,
+  "rss_gb_before": 2.259562496
+ },
+ {
+  "users": 989,
+  "events": 4910324,
+  "rows": 9897,
+  "set": "grammar (1127)",
+  "features": 1127,
+  "seconds": 6.233640432357788,
+  "rss_gb_after": 2.30144,
+  "rss_gb_before": 2.385227776
+ },
+ {
+  "users": 3333,
+  "events": 15747810,
+  "rows": 33724,
+  "set": "B0",
+  "features": 58,
+  "seconds": 4.3373119831085205,
+  "rss_gb_after": 3.264688128,
+  "rss_gb_before": 2.384633856
+ },
+ {
+  "users": 3333,
+  "events": 15747810,
+  "rows": 33724,
+  "set": "R1 (96)",
+  "features": 96,
+  "seconds": 13.041390180587769,
+  "rss_gb_after": 3.40846592,
+  "rss_gb_before": 3.264688128
+ },
+ {
+  "users": 3333,
+  "events": 15747810,
+  "rows": 33724,
+  "set": "grammar (1127)",
+  "features": 1127,
+  "seconds": 33.87129354476929,
+  "rss_gb_after": 3.325046784,
+  "rss_gb_before": 3.40846592
+ },
+ {
+  "users": 10000,
+  "events": 47790449,
+  "rows": 105261,
+  "set": "B0",
+  "features": 58,
+  "seconds": 19.001063346862793,
+  "rss_gb_after": 2.505117696,
+  "rss_gb_before": 3.325079552
+ },
+ {
+  "users": 10000,
+  "events": 47790449,
+  "rows": 105261,
+  "set": "R1 (96)",
+  "features": 96,
+  "seconds": 52.359498739242554,
+  "rss_gb_after": 4.677636096,
+  "rss_gb_before": 2.505117696
+ },
+ {
+  "users": 10000,
+  "events": 47790449,
+  "rows": 105261,
+  "set": "grammar (1127)",
+  "features": 1127,
+  "seconds": 156.92466735839844,
+  "rss_gb_after": 2.704211968,
+  "rss_gb_before": 4.678148096
+ }
+]

@@ -1,0 +1,92 @@
+{
+  "model": {
+    "model": "r3_typed",
+    "train_days": [
+      273,
+      286
+    ],
+    "sequence": 256,
+    "dim": 128,
+    "prepare_seconds": 2.7811987999884877,
+    "train_rows": 1398886,
+    "train_pairs": 1312798,
+    "train_samples": 41681,
+    "epochs": [
+      {
+        "epoch": 1,
+        "train_seconds": 150.46202200002153
+      },
+      {
+        "epoch": 2,
+        "train_seconds": 153.2885188999935
+      }
+    ],
+    "status": "complete",
+    "typed_history": true,
+    "fit_save_seconds": 312.4730759000231,
+    "peak_allocated_bytes": 1051603968,
+    "peak_reserved_bytes": 1153433600,
+    "checkpoint_bytes": 208069625,
+    "completed_epochs": 2,
+    "chosen_epochs": 2,
+    "affinity": [
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "priority": "16384"
+  },
+  "inference": {
+    "kind": "r3_val",
+    "model": "r3_typed",
+    "days": [
+      287,
+      293
+    ],
+    "rows": 725488,
+    "missing": 2026,
+    "missing_fraction": 0.002792603047879496,
+    "outside_train_item_dictionary_fraction": 0.08015432371038529,
+    "item_encoder_unk_row_fraction": 0.06349519220166289,
+    "inference_seconds": 38.441743800009135,
+    "inference_seconds_per_1000_rows": 0.052987428875472975,
+    "path": "D:\\PdM_Projects\\tbank-recsys-autofeatures\\artifacts\\runs\\r3_perseus_typed\\pred_val.parquet",
+    "metrics_computed": false,
+    "freeze_gate_present_at_start": null,
+    "peak_allocated_bytes": 251486720,
+    "peak_reserved_bytes": 270532608,
+    "native_head_parity_max_error": 0.0019413232803344727
+  },
+  "val_A": {
+    "gauc": 0.5501924886224331,
+    "ndcg10": 0.7323133187565642,
+    "roc_auc": 0.7942308847924093,
+    "groups": 7791,
+    "rows": 361619,
+    "logloss": 0.4951154589653015,
+    "selected_epoch_val_A_gauc": 0.5485737196980722,
+    "delivered_minus_selection_gauc": 0.0016187689243608583
+  },
+  "typed_history": {
+    "success": true,
+    "seconds": 15.347021900000982,
+    "sequence": 256,
+    "quotas": {
+      "0": 176,
+      "1": 64,
+      "2": 16
+    },
+    "horizons_days": {
+      "0": 30,
+      "1": 365,
+      "2": 90
+    },
+    "queries": 63232,
+    "no_history_queries": 374,
+    "strict_cutoff_assertions": true,
+    "labels_read": false
+  },
+  "main_selection_changed": false
+}
