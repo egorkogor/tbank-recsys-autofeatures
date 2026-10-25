@@ -1,0 +1,41 @@
+{
+  "dataset": "X5 RetailHero public mirror",
+  "repository": "pytorch-lifestream/retailhero-uplift",
+  "source_commit": "7744156a4f89f4828607921e8c9668f04801f4de",
+  "metadata_api": "https://huggingface.co/api/datasets/pytorch-lifestream/retailhero-uplift/tree/7744156a4f89f4828607921e8c9668f04801f4de/data",
+  "verified_on": "2026-10-25",
+  "scope": "source metadata and local file checksums only; no training, scoring or OOT changes",
+  "local_preparation": "pre-existing conversion cache; raw CSV and Parquet files are not included in Git",
+  "files": [
+    {
+      "name": "purchases",
+      "source_url": "https://huggingface.co/datasets/pytorch-lifestream/retailhero-uplift/resolve/7744156a4f89f4828607921e8c9668f04801f4de/data/purchases.csv.gz",
+      "source_csv_gz_sha256": "1342e14e1aa9d39dc242f1b66c903f0576fd184af9dc5a3bbe932607dc2d8aba",
+      "source_sha256_checked_against": "Hugging Face API LFS oid at fixed source commit",
+      "local_parquet_sha256": "6102e0de4a0bf5ad4b0a77a48672b408ce4ca812a8e48c231e6f8f3f0975fb39",
+      "local_parquet_check": "matches pre-existing local conversion manifest; conversion not independently replayed",
+      "conversion_description": "strings; value-opaque; chunks=200000; no column statistics",
+      "conversion_version": 2
+    },
+    {
+      "name": "products",
+      "source_url": "https://huggingface.co/datasets/pytorch-lifestream/retailhero-uplift/resolve/7744156a4f89f4828607921e8c9668f04801f4de/data/products.csv.gz",
+      "source_csv_gz_sha256": "6b72e025ff77974940ebdba63998a4349ae290a33efeb41f29989fdea6e96573",
+      "source_sha256_checked_against": "Hugging Face API LFS oid at fixed source commit",
+      "local_parquet_sha256": "cb00db9e6c6f3c38f3d67a924041e75189850e3164513c2c8bad7be12d902e10",
+      "local_parquet_check": "matches pre-existing local conversion manifest; conversion not independently replayed",
+      "conversion_description": "strings; value-opaque; chunks=200000; no column statistics",
+      "conversion_version": 2
+    },
+    {
+      "name": "clients",
+      "source_url": "https://huggingface.co/datasets/pytorch-lifestream/retailhero-uplift/resolve/7744156a4f89f4828607921e8c9668f04801f4de/data/clients.csv.gz",
+      "source_csv_gz_sha256": "b8985170e03dc65fa532fb6b8ca6dd70ea5c30c35ea7c1019ee6ea2034d04099",
+      "source_sha256_checked_against": "Hugging Face API LFS oid at fixed source commit",
+      "local_parquet_sha256": "0798cb7e97b373b56b4cfcc537383fedc3fc9f0e7d0e7725c4cf4b540a64bd88",
+      "local_parquet_check": "matches pre-existing local conversion manifest; conversion not independently replayed",
+      "conversion_description": "strings; value-opaque; chunks=200000; no column statistics",
+      "conversion_version": 2
+    }
+  ]
+}

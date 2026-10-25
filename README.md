@@ -1,5 +1,6 @@
 # Можно ли не придумывать признаки руками?
 
+**Автор работы — Egor Lozovoi ([egorkogor](https://github.com/egorkogor)).**
 Тестовое задание Т-Банка. Сравниваем сильный бустинг на ручных признаках с автоматическим построением признаков (поиск по грамматике агрегатов, LLM-агент) и с обучаемыми представлениями (Perseus) на трёх доменах: музыка (Yambda), кино (KION), продукты (X5).
 
 > **Статус.** Основной пайплайн заморожен до единственного OOT-прогона: опубликованный эквивалент исторического коммита `db1a3920ea3d897566541b9966bf995bec45ce9f`, манифесты в `artifacts/`. Val-A использовалась для подбора, val-B — для отчёта. Исследования после заморозки помечены отдельно; они не входят в исходное семейство гипотез.
@@ -408,7 +409,7 @@ H1 названа «не хуже» в исходном плане. При эт�
 
 - **Yambda** — [huggingface.co/datasets/yandex/yambda](https://huggingface.co/datasets/yandex/yambda), Apache-2.0.
 - **KION** — [github.com/irsafilo/KION_DATASET](https://github.com/irsafilo/KION_DATASET); лицензия не указана, авторы просят цитировать: Petrov A., Safilo I., Tikhonovich D., Ignatov D. *MTS Kion Implicit Contextualised Sequential Dataset for Movie Recommendation*, RecSys CARS 2022.
-- **X5 RetailHero** — зеркало [pytorch-lifestream/retailhero-uplift](https://huggingface.co/datasets/pytorch-lifestream/retailhero-uplift) (коммит `7744156a`); датасет хакатона X5 Retail Group (ODS, 2019), явной лицензии нет.
+- **X5 RetailHero** — зеркало [pytorch-lifestream/retailhero-uplift](https://huggingface.co/datasets/pytorch-lifestream/retailhero-uplift) (коммит `7744156a`); датасет хакатона X5 Retail Group (ODS, 2019), явной лицензии нет. Для расчётов использован ранее подготовленный локальный кэш открытого набора в Parquet. Источники CSV.gz и проверенные хэши — `artifacts/x5/source_provenance.json`; сырые файлы в Git не входят.
 - **Perseus** — [github.com/perseus2026/perseus](https://github.com/perseus2026/perseus) и perseus-exps, Apache-2.0.
   - Код фреймворка в репозиторий не входит: ставится в `external/` по инструкции, с фиксированным коммитом.
   - В локальной копии изменены только `pyproject.toml` и `uv.lock`: индекс torch под CUDA 12.6.
@@ -441,7 +442,7 @@ python scripts/compare.py --stage val --part val_B --base b0 b0 r1_decay
 **C. Все ветки и домены.** Очереди `scripts/queue_*.sh` — журнал реального прогона. Каждая ждёт строку «finished» в логе предыдущей, поэтому запускать с выводом в `logs/<имя очереди>.log` (например, `bash scripts/queue_val3.sh > logs/queue_val3.log`). Порядок:
 1. Yambda, val: `queue_val2` (перезапуск `queue_val` после исправлений; шаги веток `r1_*_k57` упадут — позже они переименованы в `r1_*_k57_offbyone`) → `queue_val3` (ждёт этапа 3 Perseus) → `queue_val4` → `queue_ctx` → `queue_val5` → `queue_master` (повторяет часть шагов после сбоя по памяти) → `queue_mood` → `queue_session` → `queue_fix`.
 2. KION: `data_en.zip` из [KION_DATASET](https://github.com/irsafilo/KION_DATASET) положить в `data/raw/kion/` и распаковать в `data/raw/kion/extracted/data_en/`; затем `TBREC_DATASET=kion python scripts/prepare_kion.py`, `... scripts/kion_features.py b0`, `... scripts/kion_features.py grammar --grid decay` и `bash scripts/queue_kion.sh`.
-3. X5: файлы `clients`, `products`, `purchases` зеркала из раздела 13 — в `data/raw/x5/*.parquet`; затем то же с `TBREC_DATASET=x5` и `prepare_x5.py`, очередь `queue_x5.sh` (ждёт KION).
+3. X5: зеркало из раздела 13 содержит CSV.gz, тогда как `prepare_x5.py` читает Parquet в `data/raw/x5/`. В исходном прогоне использованы готовые локальные конверсии `clients`, `products`, `purchases`; их происхождение зафиксировано в `artifacts/x5/source_provenance.json`. Отдельная команда получения таких конверсий на чистой машине пока не включена в маршрут. После их подготовки — `TBREC_DATASET=x5 python scripts/prepare_x5.py` и очередь `queue_x5.sh` (ждёт KION).
 4. `queue_oot_all.sh` (заморозка трёх доменов, единственный прогон OOT, Холм) → `queue_after_oot.sh` (срезы, guardrails, SHAP); затем `figures.py`, `label_checks.py` и `graded_label.py` (метка-лестница, только val).
 
 **Perseus.** Код фреймворка в репозиторий не входит, наш адаптер входит (`external/perseus_adapter/`, `external/probe_runtime.py`):
