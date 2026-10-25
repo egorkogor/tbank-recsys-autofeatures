@@ -16,7 +16,13 @@ artifacts/**
 __pycache__/
 *.pyc
 .pytest_cache/
-external/
+# Perseus clone, caches and run outputs stay local; our adapter, env script and the CUDA patch are tracked
+external/*
+!external/perseus_adapter/
+external/perseus_adapter/*
+!external/perseus_adapter/*.py
+!external/probe_env.ps1
+!external/perseus_cu126.patch
 
 logs/*
 src/*.egg-info/
