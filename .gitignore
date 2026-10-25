@@ -36,3 +36,6 @@ src/*.egg-info/
 AGENTS.md
 CLAUDE.md
 **/SKILL.md
+
+# Published provenance and file checksums
+!artifacts/publication/*.json

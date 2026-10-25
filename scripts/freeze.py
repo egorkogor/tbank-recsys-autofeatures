@@ -4,6 +4,9 @@ Writes artifacts/freeze.json: commit hash (the working tree must be clean), bran
 decision margins, the hypotheses and their branch pairs. After this file exists run_branch.py --stage oot
 is allowed, once per branch.
 
+Published equivalents carry publication_only=true and cannot authorize scoring. Existing manifests
+are never overwritten; create a separate experiment with its own freeze for any new work.
+
   python scripts/freeze.py b0 r1_decay r1_window b0_ials b0_perseus full r3_perseus ...
 """
 import json

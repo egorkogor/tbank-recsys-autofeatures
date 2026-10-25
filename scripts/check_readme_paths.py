@@ -16,7 +16,7 @@ def main():
         refs.update(re.findall(r"[.\w*{}/<>-]+(?:/[.\w*{}/<>-]+)+|[\w*.-]+\.(?:py|json|md|txt|sh|ps1|toml|lock|parquet)", code))
     refs.update(re.findall(r"(?:scripts|src|artifacts|external|configs|docs|logs|data)/[\w*/.-]+", readme))
     results = []
-    generated = ("data/", ".venv/", "external/perseus/", "external/perseus/.venv", "logs/queue_")
+    generated = ("data/", ".venv/", "external/perseus/", "external/perseus/.venv", "logs/")
     for ref in sorted(refs):
         if ref.startswith(("http:", "https:", "#")): continue
         ref = re.sub(r":\d+$", "", ref.split("#")[0]).rstrip("/")

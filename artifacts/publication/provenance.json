@@ -1,0 +1,56 @@
+{
+  "schema": "publication-provenance-v2",
+  "status": "publication derivative; not the historical execution commit",
+  "historical_frozen_commit": "e648d0af6f213988ced1e1c4b569bb4e74d220fc",
+  "historical_frozen_tree": "bfb7e4c1fe23e0ebec9e81782ffabb38254a1bce",
+  "public_derivative_of_frozen": "db1a3920ea3d897566541b9966bf995bec45ce9f",
+  "public_derivative_frozen_tree": "5cac1264dc18e8bf761ef031fc8f2f26dda2fda6",
+  "historical_manifests": [
+    {
+      "path": "artifacts/freeze.json",
+      "status": "original preserved privately; public file is a non-executable published equivalent",
+      "historical_commit": "e648d0af6f213988ced1e1c4b569bb4e74d220fc",
+      "historical_windows_bytes_sha256": "b83a29a9395317f80735979d80daab5c474b8adf45f6174fe88ab397ef0380be",
+      "original_git_blob_sha256": "7bd227bc01ce06d8acfb3850910afbce94e64fa57f85b3eb7520ce752bccfedd",
+      "published_equivalent_commit": "db1a3920ea3d897566541b9966bf995bec45ce9f",
+      "published_manifest_sha256": "253bb899fd7863347a5e6815f4a0805484536a22306eca87c6647cc8c18d657d"
+    },
+    {
+      "path": "artifacts/kion/freeze.json",
+      "status": "original preserved privately; public file is a non-executable published equivalent",
+      "historical_commit": "e648d0af6f213988ced1e1c4b569bb4e74d220fc",
+      "historical_windows_bytes_sha256": "0779b32b0ca08501c9751678ddcfdfbec98a921b60d47ed2015c5eddb8663279",
+      "original_git_blob_sha256": "160a3a6352f39a22beec84a297d8eac0eb2bb2949bc939560231968c8bed366f",
+      "published_equivalent_commit": "db1a3920ea3d897566541b9966bf995bec45ce9f",
+      "published_manifest_sha256": "af58f081fc8f9940bc563e832c667dda858361d40e9e3f08d85823f263b34edf"
+    },
+    {
+      "path": "artifacts/x5/freeze.json",
+      "status": "original preserved privately; public file is a non-executable published equivalent",
+      "historical_commit": "e648d0af6f213988ced1e1c4b569bb4e74d220fc",
+      "historical_windows_bytes_sha256": "02ef866bdec4512af9ea3794a5592ecdf0ecd5f739abcb96cd38f9a6a7c83f95",
+      "original_git_blob_sha256": "2a58cad31819d35a0c407121e06615c3998f6d2044f8234df02162d3c0f53e05",
+      "published_equivalent_commit": "db1a3920ea3d897566541b9966bf995bec45ce9f",
+      "published_manifest_sha256": "65d7cffbdb81356b49d236ea029ccc5a8348d4e325f6529ea89631beb60441f9"
+    }
+  ],
+  "content_preservation": "310 original tracked artifact files remain byte-identical. Three explicitly marked public freeze equivalents differ only in Git reference and publication metadata; all experimental SHA-256 values and results are unchanged.",
+  "chronology": "Git ancestry is preserved by a private map. Git timestamps, local logs and JSON times are not independent proof of freeze-before-OOT execution. No independent execution timestamp was found.",
+  "llm_method_preserved": true,
+  "training_or_oot_rerun": false,
+  "historical_source_head": "dce27fd3b0240c02ef60a1583ad80968d26864af",
+  "public_equivalent_source_head": "e0f1d271c59879cefe47cda8a6835c384846de60",
+  "publication_metadata_exceptions": [
+    "artifacts/freeze.json",
+    "artifacts/kion/freeze.json",
+    "artifacts/x5/freeze.json"
+  ],
+  "retained_local_log_metadata": {
+    "file": "artifacts/runs/r3_perseus/cost.json",
+    "status": "immutable historical measurement-log path strings; not public navigation or executable inputs",
+    "paths": [
+      "logs/codex/perseus_stage2_r3_small.log",
+      "logs/codex/perseus_stage2_r3_small_retry.log"
+    ]
+  }
+}

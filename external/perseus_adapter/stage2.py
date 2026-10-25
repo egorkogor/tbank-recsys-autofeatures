@@ -323,6 +323,9 @@ def score(args):
     freeze_gate_present=(ROOT/'artifacts/freeze.json').is_file()
     if args.kind=='r3_oot' and not freeze_gate_present:
         log('R3 OOT NOT SCORED: artifacts/freeze.json absent');return
+    if args.kind=='r3_oot':
+        freeze_manifest=json.loads((ROOT/'artifacts/freeze.json').read_text(encoding='utf-8'))
+        assert not freeze_manifest.get('publication_only',False), 'publication-only manifest cannot authorize OOT'
     directory=BASE/args.model
     torch.set_num_threads(4)
     checkpoint=core.checkpoint.Trained.load(directory/'checkpoint')

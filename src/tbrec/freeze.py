@@ -50,6 +50,7 @@ def manifest(branches: list[str]) -> dict:
 def check(branch: str) -> None:
     assert FREEZE.exists(), "OOT is run only after the freeze"
     fz = json.loads(FREEZE.read_text())
+    assert not fz.get("publication_only", False), "publication-only manifest cannot authorize OOT"
     assert branch in fz["branches"], f"{branch} is not in the frozen list"
     assert git("rev-parse", "HEAD") == fz["commit"], "HEAD differs from the frozen commit"
     assert not git("status", "--porcelain", "--", *CODE), "code changed after the freeze"
