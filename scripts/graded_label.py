@@ -26,7 +26,7 @@ import numpy as np  # noqa: E402
 import polars as pl  # noqa: E402
 
 from tbrec.branches import resolve  # noqa: E402
-from tbrec.config import ART, PROC, SEED  # noqa: E402
+from tbrec.config import ART, DATASET, PROC, SEED, STAGES  # noqa: E402
 from tbrec.data import impressions  # noqa: E402
 from tbrec.metrics import _user_sums, paired_bootstrap, summary  # noqa: E402
 from tbrec.metrics import per_group as per_group_binary  # noqa: E402
@@ -35,6 +35,7 @@ from tbrec.model import BASE_PARAMS, EARLY, MAX_ROUNDS, groups, load, matrix, sa
 RUNS = ART / "runs"
 BRANCHES = ["b0", "r1_decay"]
 K = 10
+VAL_DAYS = STAGES["val"]["train"] + STAGES["val"]["eval"]
 
 
 def log(s):
@@ -43,9 +44,10 @@ def log(s):
 
 def grades() -> pl.DataFrame:
     """row -> grade (0/1/2) and like, rebuilt exactly as the task rows (scripts/build_features.py make_rows)."""
-    rows = pl.read_parquet(ART / "rows.parquet").select("row", "uid", "item", "day", "t", "y")
+    rows = (pl.scan_parquet(ART / "rows.parquet").filter(pl.col("day").is_in(VAL_DAYS))
+            .select("row", "uid", "item", "day", "t", "y").collect())
     days = sorted(rows["day"].unique().to_list())
-    ev = pl.read_parquet(PROC / "events.parquet")
+    ev = pl.scan_parquet(PROC / "events.parquet").filter(pl.col("day").is_in(days)).collect()
     imp = (ev.filter((pl.col("kind") == 0) & (pl.col("org") == 0) & pl.col("day").is_in(days))
            .select("uid", "item", "day", "t", "pr"))
     key = ["day", "uid", "t", "item"]
@@ -62,7 +64,7 @@ def grades() -> pl.DataFrame:
 
 def train(branch: str, g: pl.DataFrame) -> pl.DataFrame:
     df, cols = load(resolve(branch, "val"))
-    df = df.join(g, on="row", how="left")
+    df = df.filter(pl.col("day").is_in(VAL_DAYS)).join(g, on="row", how="left")
     parts = split(df, "val")
     tr, va = parts["train"], parts["val_A"]
     frozen = json.loads((RUNS / branch / "params.json").read_text())["params"]
@@ -125,10 +127,12 @@ def bootstrap(pgs: dict[str, pl.DataFrame], pairs: list[tuple[str, str]], n: int
 
 
 def main():
+    assert DATASET == "yambda", "This exploration is defined for Yambda only"
     g = grades()
     log(f"grades: {g.group_by('g').len().sort('g').to_dicts()}, likes {int(g['like'].sum())}")
     preds = {b: train(b, g) for b in BRANCHES}
-    rows = pl.read_parquet(ART / "rows.parquet").select("row", "uid", "day", "y", "val_half").join(g, on="row")
+    rows = (pl.scan_parquet(ART / "rows.parquet").filter(pl.col("day").is_in(VAL_DAYS))
+            .select("row", "uid", "day", "y", "val_half").collect().join(g, on="row"))
     v = rows.filter(pl.col("val_half") == "B")
     names = {}
     for b in BRANCHES:
